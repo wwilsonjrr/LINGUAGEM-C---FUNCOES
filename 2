@@ -8,7 +8,7 @@
 #include <stdlib.h>    // Inclui funções padrão do sistema (system("pause"), exit, etc.)
 
 // --------------------------- Função para exibir data por extenso ---------------------------
-void exibirDataExtenso(int dia, int mes, int ano) // Define uma função que recebe 3 inteiros: dia, mês e ano
+void exibirDataExtenso(int dia, int mes, int ano) // Define uma função que recebe 3 inteiros: dia, mês e ano // void: a função NÃO retorna valor — ela só executa uma ação
 {                                                  // Início do bloco da função
     char meses[12][10] = {                          // Vetor de 12 strings (arrays de char), SEM ponteiros
         "janeiro",                                  // Índice 0 → mês 1
@@ -60,3 +60,4 @@ int main()                                         // Função principal onde o 
     system("pause");                               // Pausa o programa (apenas no Windows)
     return 0;                                      // Retorna 0 para indicar término bem-sucedido
 }                                                  // Fim da função principal
+
