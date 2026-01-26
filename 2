@@ -1,0 +1,62 @@
+/*
+2. Faça uma função que receba a data atual (dia, mês e ano em inteiro)
+   e exiba-a na tela no formato textual por extenso.
+   Exemplo: Data: 01/01/2000  →  Imprimir: 1 de janeiro de 2000
+*/
+
+#include <stdio.h>     // Inclui a biblioteca padrão de entrada e saída (para printf e scanf)
+#include <stdlib.h>    // Inclui funções padrão do sistema (system("pause"), exit, etc.)
+
+// --------------------------- Função para exibir data por extenso ---------------------------
+void exibirDataExtenso(int dia, int mes, int ano) // Define uma função que recebe 3 inteiros: dia, mês e ano
+{                                                  // Início do bloco da função
+    char meses[12][10] = {                          // Vetor de 12 strings (arrays de char), SEM ponteiros
+        "janeiro",                                  // Índice 0 → mês 1
+        "fevereiro",                                // Índice 1 → mês 2
+        "marco",                                    // Índice 2 → mês 3
+        "abril",                                    // Índice 3 → mês 4
+        "maio",                                     // Índice 4 → mês 5
+        "junho",                                    // Índice 5 → mês 6
+        "julho",                                    // Índice 6 → mês 7
+        "agosto",                                   // Índice 7 → mês 8
+        "setembro",                                 // Índice 8 → mês 9
+        "outubro",                                  // Índice 9 → mês 10
+        "novembro",                                 // Índice 10 → mês 11
+        "dezembro"                                  // Índice 11 → mês 12
+    };                                              // Fim da lista de meses
+
+    if (mes < 1 || mes > 12)                        // Verifica se o mês informado é inválido (menor que 1 ou maior que 12)
+    {
+        printf("Mes invalido!\n");                  // Exibe mensagem de erro
+        return;                                     // Encerra a função sem prosseguir
+    }
+
+    printf("%d de %s de %d\n", dia, meses[mes - 1], ano);
+    // Imprime a data no formato: "dia de mês de ano"
+    // O índice do vetor 'meses' é (mes - 1) porque o vetor começa no índice 0
+}                                                  // Fim da função exibirDataExtenso
+
+// --------------------------- Função principal ----------------------------------------------
+int main()                                         // Função principal onde o programa começa
+{                                                  // Início do bloco principal
+    int dia, mes, ano;                             // Declara três variáveis inteiras para armazenar a data
+
+    printf("Digite o dia: ");                      // Solicita o dia ao usuário
+    scanf("%d", &dia);                             // Lê o valor digitado e armazena em 'dia'
+
+    printf("Digite o mes (1 a 12): ");             // Solicita o mês ao usuário
+    scanf("%d", &mes);                             // Lê o valor digitado e armazena em 'mes'
+
+    printf("Digite o ano: ");                      // Solicita o ano ao usuário
+    scanf("%d", &ano);                             // Lê o valor digitado e armazena em 'ano'
+
+    printf("\nData digitada: %02d/%02d/%04d\n", dia, mes, ano);
+    // Exibe a data no formato numérico padrão dd/mm/aaaa
+    // Os códigos %02d e %04d garantem zeros à esquerda (ex: 01, 02, 2025)
+
+    printf("Data por extenso: ");                  // Exibe um rótulo antes da função
+    exibirDataExtenso(dia, mes, ano);              // Chama a função e mostra a data por extenso
+
+    system("pause");                               // Pausa o programa (apenas no Windows)
+    return 0;                                      // Retorna 0 para indicar término bem-sucedido
+}                                                  // Fim da função principal
