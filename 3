@@ -1,0 +1,45 @@
+/*
+3. Faça uma função para verificar se um número é positivo ou negativo.
+   O valor de retorno será:
+   →  1 se for positivo
+   → -1 se for negativo
+   →  0 se for igual a zero
+*/
+
+#include <stdio.h>    // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>   // system("pause")
+
+// --------------------------- Função que verifica o sinal do número ---------------------------
+int verificaNumero(int n)   // Define a função chamada 'verificaNumero' que recebe um inteiro 'n' e retorna um inteiro
+{                           // Início do bloco da função
+    if (n > 0)              // Se o valor de 'n' for maior que zero
+        return 1;           // Retorna 1 (indica que é positivo)
+    else if (n < 0)         // Caso contrário, se o valor de 'n' for menor que zero
+        return -1;          // Retorna -1 (indica que é negativo)
+    else                    // Caso contrário (ou seja, se não for maior nem menor que zero)
+        return 0;           // Retorna 0 (indica que é igual a zero)
+}                           // Fim da função 'verificaNumero'
+
+// --------------------------- Função principal ------------------------------------------------
+int main()                  // Função principal do programa (ponto de entrada)
+{                           // Início do bloco principal
+    int numero;             // Declara uma variável inteira chamada 'numero' para armazenar o valor digitado
+    int resultado;          // Declara uma variável inteira chamada 'resultado' para guardar o retorno da função
+
+    printf("Digite um numero inteiro: ");  // Exibe mensagem solicitando ao usuário um número inteiro
+    scanf("%d", &numero);                  // Lê o número digitado pelo usuário e armazena em 'numero'
+
+    resultado = verificaNumero(numero);    // Chama a função 'verificaNumero' passando o valor digitado
+                                           // e armazena o valor retornado (1, -1 ou 0) em 'resultado'
+
+    if (resultado == 1)                    // Verifica se o valor retornado foi 1
+        printf("O numero %d eh POSITIVO.\n", numero);   // Se sim, mostra mensagem informando que é positivo
+    else if (resultado == -1)              // Caso contrário, verifica se foi -1
+        printf("O numero %d eh NEGATIVO.\n", numero);   // Se sim, mostra mensagem informando que é negativo
+    else                                   // Caso contrário (ou seja, se for 0)
+        printf("O numero %d eh IGUAL A ZERO.\n", numero);  // Exibe mensagem indicando que é zero
+
+
+    system("pause");
+    return 0;              // Indica que o programa terminou com sucesso (retorno padrão da função main)
+}                          // Fim do bloco principal da função main
