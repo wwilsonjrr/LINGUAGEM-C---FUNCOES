@@ -1,0 +1,46 @@
+/*
+4. Faça uma função para verificar se um número é um quadrado perfeito.
+   Um quadrado perfeito é um número inteiro não negativo que pode ser expresso
+   como o quadrado de outro número inteiro. Exemplo: 1, 4, 9, 16...
+*/
+
+#include <stdio.h>     // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <math.h>      // Inclui a biblioteca matemática (necessária para sqrt - raiz quadrada)
+#include <stdlib.h>    // system("pause")
+
+// ---------------------------- Função que verifica quadrado perfeito ----------------------------
+int ehQuadradoPerfeito(int n)    // Declara uma função que recebe um número inteiro e retorna um inteiro (1 ou 0)
+{                                // Início do bloco da função
+    if (n < 0)                   // Verifica se o número é negativo
+        return 0;                // Se for negativo, não pode ser quadrado perfeito → retorna 0 (falso)
+
+    int raiz = sqrt(n);          // Calcula a raiz quadrada inteira de 'n' e armazena em 'raiz'
+                                 // A função sqrt() retorna um valor do tipo double; ele é convertido para int automaticamente
+
+    if (raiz * raiz == n)        // Verifica se o quadrado da raiz inteira é exatamente igual ao número original
+        return 1;                // Se for igual, o número é um quadrado perfeito → retorna 1 (verdadeiro)
+    else                         // Caso contrário (se o quadrado não for igual)
+        return 0;                // Retorna 0 indicando que não é quadrado perfeito
+}                                // Fim da função ehQuadradoPerfeito
+
+// ---------------------------- Função principal --------------------------------------------------
+int main()                       // Função principal do programa
+{                                // Início do bloco principal
+    int numero;                  // Declara variável inteira para armazenar o número digitado pelo usuário
+
+    printf("Digite um numero inteiro: ");  // Exibe mensagem solicitando um número
+    scanf("%d", &numero);                  // Lê o número digitado e armazena na variável 'numero'
+
+    if (ehQuadradoPerfeito(numero))        // Chama a função 'ehQuadradoPerfeito' passando 'numero' como argumento,
+                                           // se o retorno for 1, significa que é quadrado perfeito.
+                                           // Na função principal, também poderia criar uma variável resultado para
+                                           // encontrar o resultado, mas if (ehQuadradoPerfeito(numero))
+                                           // já fornece se é ou não quadrado perfeito de acordo com as instruções da função criada inicialmente.
+        printf("O numero %d eh um quadrado perfeito.\n", numero);  // Exibe mensagem afirmando que é quadrado perfeito
+    else                                   // Caso contrário (função retornou 0)
+        printf("O numero %d NAO eh um quadrado perfeito.\n", numero); // Exibe mensagem afirmando que não é quadrado perfeito
+
+
+    system("pause");
+    return 0;                  // Retorna 0 indicando que o programa terminou com sucesso
+}                              // Fim do bloco principal da função main
