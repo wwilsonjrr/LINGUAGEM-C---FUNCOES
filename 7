@@ -1,0 +1,42 @@
+/*
+7. Faça uma função que receba uma temperatura em graus Celsius
+   e retorne-a convertida em graus Fahrenheit.
+   Fórmula: F = C * (9.0 / 5.0) + 32.0
+*/
+
+#include <stdio.h>   // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>  // system("pause");
+
+// --------------------------- Função de conversão ---------------------------
+double celsiusParaFahrenheit(double celsius)  // Declara a função que recebe um valor double (graus Celsius)
+{                                             // Início do bloco da função
+    double fahrenheit;                        // Declara variável local para armazenar o resultado da conversão
+
+    fahrenheit = celsius * (9.0 / 5.0) + 32.0;
+    // Aplica a fórmula de conversão:
+    // Multiplica a temperatura em Celsius por (9/5) e soma 32.
+    // Exemplo: 0°C * (9/5) + 32 = 32°F
+
+    return fahrenheit;                        // Retorna o valor convertido em Fahrenheit
+}                                             // Fim da função 'celsiusParaFahrenheit'
+
+// --------------------------- Função principal ------------------------------
+int main()                                    // Início da função principal do programa
+{                                             // Abertura do bloco principal
+    double c;                                 // Declara variável double para armazenar a temperatura em Celsius
+    double f;                                 // Declara variável double para armazenar o resultado em Fahrenheit
+
+    printf("Digite a temperatura em graus Celsius: ");  // Exibe mensagem pedindo o valor em Celsius
+    scanf("%lf", &c);                                   // Lê o valor digitado e armazena na variável 'c'
+                                                        // '%lf' é usado para leitura de variáveis do tipo double
+
+    f = celsiusParaFahrenheit(c);                       // Chama a função 'celsiusParaFahrenheit' passando 'c' como argumento
+                                                        // O valor retornado (em Fahrenheit) é armazenado em 'f'
+
+    printf("A temperatura de %.2lf graus Celsius equivale a %.2lf graus Fahrenheit.\n", c, f);
+    // Exibe o resultado formatado com duas casas decimais:
+    // %.2lf → mostra valores double com 2 casas decimais
+
+    system("pause");
+    return 0;                                           // Indica que o programa terminou corretamente
+}                                                       // Fim da função principal
