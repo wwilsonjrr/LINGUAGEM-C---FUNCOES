@@ -1,0 +1,49 @@
+/*
+5. Faça uma função e um programa de teste para o cálculo do volume de uma esfera.
+   Sendo que o raio é passado por parâmetro.
+   Fórmula: V = (4/3) * π * R³
+*/
+
+#include <stdio.h>     // Inclui a biblioteca padrão de entrada e saída (para printf e scanf)
+#include <stdlib.h>    // system("pause")
+#include <math.h>      // Inclui a biblioteca matemática (para usar pow())
+
+#define PI 3.141592653589793
+// Define uma constante simbólica PI com o valor aproximado de π
+// Usar #define garante portabilidade, pois M_PI não é padrão da linguagem C
+
+// --------------------------- Função que calcula o volume da esfera ---------------------------
+double volumeEsfera(double raio)   // Define a função 'volumeEsfera' que recebe o raio (double) e retorna o volume (double)
+{                                  // Início do bloco da função
+    double volume;                 // Declara variável local 'volume' para armazenar o resultado do cálculo
+
+    volume = (4.0 / 3.0) * PI * pow(raio, 3);
+    // Calcula o volume da esfera usando a fórmula:
+    // (4/3) × π × (raio³)
+    // A função pow(raio, 3) eleva o raio à terceira potência
+    // PI é uma constante definida pelo programador que representa o valor de π
+
+    return volume;                 // Retorna o valor calculado do volume para quem chamou a função
+}                                  // Fim da função 'volumeEsfera'
+
+// --------------------------- Função principal (programa de teste) ----------------------------
+int main()                         // Início da função principal
+{                                  // Abertura do bloco principal
+    double r;                      // Declara variável 'r' para armazenar o raio digitado pelo usuário
+    double resultado;              // Declara variável 'resultado' para armazenar o volume retornado pela função
+
+    printf("Digite o raio da esfera: ");  // Exibe mensagem solicitando o valor do raio
+    scanf("%lf", &r);                     // Lê o valor digitado (double) e armazena em 'r'
+                                          // "%lf" é usado para leitura de números de ponto flutuante do tipo double
+
+    resultado = volumeEsfera(r);          // Chama a função 'volumeEsfera' passando o raio como argumento
+                                          // e armazena o volume retornado em 'resultado'
+
+    printf("O volume da esfera de raio %.2lf eh: %.4lf\n", r, resultado);
+    // Exibe o resultado formatado:
+    // - "%.2lf" mostra o raio com 2 casas decimais
+    // - "%.4lf" mostra o volume com 4 casas decimais
+
+    system("pause");
+    return 0;                    // Indica que o programa terminou corretamente
+}                                // Fim da função principal
