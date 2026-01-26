@@ -1,0 +1,40 @@
+/*
+1. Crie uma função que recebe como parâmetro um número inteiro
+   e devolve o seu dobro.
+
+
+   Começo pela função ou pelo main?
+   Essa dúvida é exatamente o “pulo do gato” para entender bem funções em C
+   Resposta curta: mentalmente você começa pela função, mas no código tanto faz a ordem, desde que o compilador saiba que ela existe.
+
+*/
+
+#include <stdio.h>     // Inclui a biblioteca padrão de entrada e saída (para printf e scanf)
+#include <stdlib.h>    // system("pause")
+
+// --------------------------- Declaração da função ---------------------------
+int dobro(int n)       // Define a função 'dobro', que recebe um inteiro 'n' e retorna um inteiro
+{                      // Início do bloco da função
+    return n * 2;      // Calcula e retorna o dobro de 'n' (multiplicação por 2)
+}                      // Fim do bloco da função
+
+// --------------------------- Função principal -------------------------------
+int main()             // Função principal do programa, onde a execução começa
+{                      // Início do bloco principal
+    int numero;        // Declara uma variável inteira chamada 'numero' para armazenar o valor digitado
+    int resultado;     // Declara outra variável inteira para guardar o resultado da função
+
+    printf("Digite um numero inteiro: ");  // Exibe mensagem pedindo um número inteiro ao usuário
+    scanf("%d", &numero);                  // Lê o número digitado pelo usuário e armazena em 'numero'
+
+    resultado = dobro(numero);             // Chama a função 'dobro' passando 'numero' como argumento
+                                           // e armazena o valor retornado em 'resultado'
+
+    printf("O dobro de %d eh %d.\n", numero, resultado);
+    // Exibe o resultado formatado na tela, mostrando o número original e o seu dobro
+
+    system("pause");
+    return 0;            // Retorna 0 para indicar que o programa terminou com sucesso
+                         // Fim do bloco da função main
+
+}
