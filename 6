@@ -1,0 +1,45 @@
+/*
+6. Faça uma função que receba 3 números inteiros como parâmetro,
+   representando horas, minutos e segundos, e os converta em segundos.
+*/
+
+#include <stdio.h>    // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>   // system("pause")
+
+// --------------------------- Função que converte em segundos ---------------------------
+int converteParaSegundos(int horas, int minutos, int segundos)  // Define a função com três parâmetros inteiros
+{                                                               // Início do bloco da função
+    int totalSegundos;                                          // Declara variável local para armazenar o resultado da conversão
+
+    totalSegundos = (horas * 3600) + (minutos * 60) + segundos;
+    // Cada hora tem 3600 segundos (60 * 60)
+    // Cada minuto tem 60 segundos
+    // Soma o total de segundos equivalentes às horas, minutos e segundos informados
+
+    return totalSegundos;                                       // Retorna o valor total em segundos para quem chamou a função
+}                                                               // Fim da função 'converteParaSegundos'
+
+// --------------------------- Função principal -------------------------------------------
+int main()                                                      // Função principal do programa (ponto de entrada)
+{                                                               // Início do bloco principal
+    int h, m, s;                                                // Declara três variáveis inteiras: h (horas), m (minutos), s (segundos)
+    int resultado;                                              // Declara variável inteira para armazenar o total convertido
+
+    printf("Digite as horas: ");                                // Exibe mensagem pedindo a quantidade de horas
+    scanf("%d", &h);                                            // Lê o valor digitado e armazena em 'h'
+
+    printf("Digite os minutos: ");                              // Exibe mensagem pedindo a quantidade de minutos
+    scanf("%d", &m);                                            // Lê o valor digitado e armazena em 'm'
+
+    printf("Digite os segundos: ");                             // Exibe mensagem pedindo a quantidade de segundos
+    scanf("%d", &s);                                            // Lê o valor digitado e armazena em 's'
+
+    resultado = converteParaSegundos(h, m, s);                  // Chama a função passando h, m e s como argumentos
+                                                                // O retorno (em segundos) é armazenado em 'resultado'
+
+    printf("\nO total de tempo em segundos eh: %d\n", resultado);
+    // Exibe o resultado da conversão na tela
+
+    system("pause");
+    return 0;                                                   // Indica que o programa terminou com sucesso
+}                                                               // Fim da função principal
