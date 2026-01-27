@@ -1,0 +1,47 @@
+/*
+12. Escreva uma função que receba um número inteiro maior do que zero
+    e retorne a soma de todos os seus algarismos.
+    Exemplo: 251 → 8 (2 + 5 + 1)
+    Se o número lido não for maior que zero, o programa exibirá "Número inválido".
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que soma os algarismos ---------------------------
+int somaAlgarismos(int numero)    // Declara função que recebe um inteiro positivo e retorna um inteiro
+{                                 // Início do bloco da função
+    int soma = 0;                 // Inicializa variável que guardará a soma dos dígitos
+
+    while (numero > 0)            // Enquanto o número ainda tiver dígitos
+    {                             // Início do laço 'while'
+        soma += numero % 10;      // Soma o último dígito do número (obtido com o resto da divisão por 10) // soma = soma + numero % 10
+        numero = numero / 10;     // Remove o último dígito (dividindo o número inteiro por 10)
+    }                             // Fim do laço 'while'
+
+    return soma;                  // Retorna o valor final da soma dos algarismos
+}                                 // Fim da função 'somaAlgarismos'
+
+// --------------------------- Função principal ----------------------------------------
+int main()                        // Início da função principal do programa
+{                                 // Início do bloco principal
+    int num;                      // Declara variável para armazenar o número digitado pelo usuário
+    int resultado;                // Declara variável para armazenar o resultado da soma
+
+    printf("Digite um numero inteiro maior que zero: ");  // Solicita entrada do usuário
+    scanf("%d", &num);                                   // Lê o número digitado e armazena em 'num'
+
+    if (num <= 0)                                         // Verifica se o número é menor ou igual a zero
+    {                                                     // Início do bloco do 'if'
+        printf("Numero invalido.\n");                     // Exibe mensagem de erro
+        return 0;                                         // Encerra o programa imediatamente
+    }                                                     // Fim do bloco do 'if'
+
+    resultado = somaAlgarismos(num);                      // Chama a função e armazena o valor retornado
+
+    printf("A soma dos algarismos de %d eh: %d\n", num, resultado);
+    // Exibe o número original e o resultado da soma de seus dígitos
+
+    system("pause");
+    return 0;                                             // Indica que o programa terminou corretamente
+}                                                         // Fim da função principal
