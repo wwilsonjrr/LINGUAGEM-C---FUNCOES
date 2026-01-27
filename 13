@@ -1,0 +1,73 @@
+/*
+13. Faça uma função que receba dois valores numéricos e um símbolo.
+    O símbolo representa a operação desejada:
+    '+' → adição
+    '-' → subtração
+    '/' → divisão
+    '*' → multiplicação
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados (printf, scanf)
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que realiza a operação ---------------------------
+double calculaOperacao(double num1, double num2, char operacao)  // Recebe dois números e um caractere
+{                                                                // Início do bloco da função
+    double resultado;                                            // Variável local para armazenar o resultado
+
+    // Estrutura condicional para escolher a operação conforme o símbolo
+    if (operacao == '+')                                         // Se o símbolo for '+'
+    {
+        resultado = num1 + num2;                                 // Soma os dois números
+    }
+    else if (operacao == '-')                                    // Se o símbolo for '-'
+    {
+        resultado = num1 - num2;                                 // Subtrai o segundo do primeiro
+    }
+    else if (operacao == '*')                                    // Se o símbolo for '*'
+    {
+        resultado = num1 * num2;                                 // Multiplica os dois números
+    }
+    else if (operacao == '/')                                    // Se o símbolo for '/'
+    {
+        if (num2 != 0)                                           // Verifica se o divisor não é zero
+        {
+            resultado = num1 / num2;                             // Divide num1 por num2
+        }
+        else                                                     // Caso o divisor seja zero
+        {
+            printf("Erro: divisao por zero!\n");                 // Exibe mensagem de erro
+            return 0;                                            // Retorna 0 para indicar falha
+        }
+    }
+    else                                                         // Caso o símbolo não seja reconhecido
+    {
+        printf("Operacao invalida! Use +, -, * ou /.\n");        // Exibe mensagem de erro
+        return 0;                                                // Retorna 0 para indicar falha
+    }
+
+    return resultado;                                            // Retorna o valor calculado
+}                                                                // Fim da função 'calculaOperacao'
+
+// --------------------------- Função principal ----------------------------------------
+int main()                                                       // Início da função principal
+{                                                                // Início do bloco principal
+    double a, b, res;                                            // Declara variáveis para armazenar os números e o resultado
+    char op;                                                     // Declara variável para armazenar o símbolo da operação
+
+    printf("Digite o primeiro numero: ");                        // Solicita o primeiro número
+    scanf("%lf", &a);                                            // Lê o valor e armazena em 'a'
+
+    printf("Digite o segundo numero: ");                         // Solicita o segundo número
+    scanf("%lf", &b);                                            // Lê o valor e armazena em 'b'
+
+    printf("Digite a operacao (+, -, *, /): ");                  // Solicita o símbolo da operação
+    scanf(" %c", &op);                                           // Lê o símbolo digitado (espaço ignora '\n')
+
+    res = calculaOperacao(a, b, op);                             // Chama a função passando os valores e o símbolo
+
+    printf("Resultado: %.2lf\n", res);                           // Exibe o resultado formatado com 2 casas decimais
+
+    system("pause");
+    return 0;                                                    // Indica que o programa terminou com sucesso
+}                                                                // Fim da função principal
