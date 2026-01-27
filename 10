@@ -1,0 +1,41 @@
+/*
+10. Faça uma função que receba dois números e retorne qual deles é o maior.
+*/
+
+#include <stdio.h>   // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que retorna o maior número ---------------------------
+double maiorNumero(double x, double y)  // Declara uma função que recebe dois valores do tipo double
+{                                       // Início do bloco da função
+    if (x > y)                          // Verifica se o primeiro número é maior que o segundo
+    {                                   // Início do bloco do 'if'
+        return x;                       // Se for verdadeiro, retorna o valor de x
+    }                                   // Fim do bloco do 'if'
+    else                                // Caso contrário (x não é maior que y)
+    {                                   // Início do bloco do 'else'
+        return y;                       // Retorna o valor de y (ou seja, o maior entre os dois)
+    }                                   // Fim do bloco do 'else'
+}                                       // Fim da função 'maiorNumero'
+
+// --------------------------- Função principal --------------------------------------------
+int main()                              // Início da função principal do programa
+{                                       // Início do bloco principal
+    double a, b;                        // Declara duas variáveis double para armazenar os números digitados
+    double resultado;                   // Variável para armazenar o valor retornado pela função
+
+    printf("Digite o primeiro numero: ");  // Exibe mensagem pedindo o primeiro número
+    scanf("%lf", &a);                      // Lê o valor digitado e armazena na variável 'a'
+
+    printf("Digite o segundo numero: ");   // Exibe mensagem pedindo o segundo número
+    scanf("%lf", &b);                      // Lê o valor digitado e armazena na variável 'b'
+
+    resultado = maiorNumero(a, b);         // Chama a função 'maiorNumero' passando 'a' e 'b' como parâmetros
+                                           // O valor retornado (o maior número) é armazenado em 'resultado'
+
+    printf("\nO maior numero entre %.2lf e %.2lf eh: %.2lf\n", a, b, resultado);
+    // Exibe o resultado formatado com duas casas decimais (%.2lf)
+
+    system("pause");
+    return 0;                              // Indica que o programa terminou corretamente
+}                                           // Fim da função principal
