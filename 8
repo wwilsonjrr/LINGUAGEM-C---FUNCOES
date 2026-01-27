@@ -1,0 +1,46 @@
+/*
+8. Sejam a e b os catetos de um triângulo, onde a hipotenusa é obtida pela equação:
+   hipotenusa = sqrt(a² + b²).
+   Faça uma função que receba os valores de a e b e calcule o valor da hipotenusa.
+*/
+
+#include <stdio.h>    // Inclui a biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>   // system("pause")
+#include <math.h>     // Inclui a biblioteca matemática (necessária para usar a função sqrt)
+
+// --------------------------- Função que calcula a hipotenusa ---------------------------
+double calculaHipotenusa(double a, double b)   // Declara função que recebe dois valores double (a e b)
+{                                              // Início do bloco da função
+    double hipotenusa;                         // Declara variável para armazenar o resultado do cálculo
+
+    hipotenusa = sqrt(pow(a, 2) + pow(b, 2));  // Calcula a hipotenusa usando a fórmula: √(a² + b²)
+                                               // - pow(a, 2) eleva 'a' ao quadrado
+                                               // - pow(b, 2) eleva 'b' ao quadrado
+                                               // - sqrt(...) calcula a raiz quadrada do resultado da soma
+
+    return hipotenusa;                         // Retorna o valor calculado para quem chamou a função
+}                                              // Fim da função 'calculaHipotenusa'
+
+// --------------------------- Função principal ------------------------------------------
+int main()                                     // Função principal do programa
+{                                              // Início do bloco principal
+    double cateto1, cateto2;                   // Declara duas variáveis para armazenar os catetos (a e b)
+    double resultado;                          // Declara variável para armazenar o resultado da hipotenusa
+
+    printf("Digite o valor do primeiro cateto (a): ");   // Solicita o valor de 'a' ao usuário
+    scanf("%lf", &cateto1);                              // Lê o valor digitado e armazena em 'cateto1'
+                                                         // "%lf" é usado para leitura de números double
+
+    printf("Digite o valor do segundo cateto (b): ");    // Solicita o valor de 'b' ao usuário
+    scanf("%lf", &cateto2);                              // Lê o valor digitado e armazena em 'cateto2'
+
+    resultado = calculaHipotenusa(cateto1, cateto2);     // Chama a função passando os dois catetos como argumentos
+                                                         // O valor retornado (hipotenusa) é armazenado em 'resultado'
+
+    printf("\nO valor da hipotenusa eh: %.4lf\n", resultado);
+    // Exibe o resultado formatado com 4 casas decimais
+    // "%.4lf" indica que serão mostrados 4 dígitos após o ponto decimal
+
+    system("pause");
+    return 0;                                            // Indica que o programa terminou com sucesso
+}                                                        // Fim da função principal
