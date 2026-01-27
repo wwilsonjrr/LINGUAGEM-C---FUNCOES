@@ -1,0 +1,47 @@
+/*
+9. Faça uma função que receba a altura e o raio de um cilindro circular
+   e retorne o volume do cilindro.
+   Fórmula: V = π * raio² * altura, onde π = 3.141592
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>  // system("pause")
+#include <math.h>    // Biblioteca matemática (necessária para a função pow)
+
+#define PI 3.141592653589793
+
+// --------------------------- Função que calcula o volume ---------------------------
+double calculaVolumeCilindro(double raio, double altura)  // Declara função que recebe dois valores double
+{                                                         // Início do bloco da função
+    double volume;                                        // Variável local para armazenar o resultado do cálculo
+
+    volume = PI * pow(raio, 2) * altura;                  // Aplica a fórmula do volume do cilindro:
+                                                          // V = π * (raio²) * altura
+                                                          // pow(raio, 2) → calcula o quadrado do raio
+
+    return volume;                                        // Retorna o valor calculado do volume
+}                                                         // Fim da função 'calculaVolumeCilindro'
+
+// --------------------------- Função principal ---------------------------------------
+int main()                                                // Função principal (ponto de entrada do programa)
+{                                                         // Início do bloco principal
+    double r, h;                                          // Declara variáveis double para o raio e a altura
+    double resultado;                                     // Variável para armazenar o volume calculado
+
+    printf("Digite o valor do raio do cilindro: ");       // Exibe mensagem solicitando o raio
+    scanf("%lf", &r);                                     // Lê o valor digitado e armazena em 'r'
+                                                          // '%lf' é o especificador para leitura de double
+
+    printf("Digite o valor da altura do cilindro: ");     // Exibe mensagem solicitando a altura
+    scanf("%lf", &h);                                     // Lê o valor digitado e armazena em 'h'
+
+    resultado = calculaVolumeCilindro(r, h);              // Chama a função e passa 'r' e 'h' como argumentos
+                                                          // O retorno (volume) é armazenado em 'resultado'
+
+    printf("\nO volume do cilindro eh: %.4lf unidades cubicas\n", resultado);
+    // Exibe o resultado formatado com 4 casas decimais
+    // "%.4lf" → formatação para mostrar números double com 4 casas decimais
+
+    system("pause");
+    return 0;                                             // Indica que o programa terminou com sucesso
+}                                                         // Fim da função principal
