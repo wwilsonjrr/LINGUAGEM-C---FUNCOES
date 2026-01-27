@@ -1,0 +1,61 @@
+/*
+11. Elabore uma função que receba três notas de um aluno e uma letra.
+
+    - Se a letra for 'A', calcular a média aritmética.
+      ma = (x1 + x2 + x3)/3
+
+    - Se a letra for 'P', calcular a média ponderada com pesos 5, 3 e 2.
+      mp = ((x1*p1) + (x2*p2) + (x3*p3))/ p1 + p2 + p3
+
+      x = valores
+      p = pesos
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (necessária para printf e scanf)
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que calcula a média ---------------------------
+double calculaMedia(double n1, double n2, double n3, char tipo)  // Declara função com 3 notas e 1 caractere ('A' ou 'P')
+{                                                                // Início do bloco da função
+    double media;                                                // Declara variável para armazenar o resultado
+
+    if (tipo == 'A' || tipo == 'a')                              // Verifica se o tipo é 'A' (maiúsculo ou minúsculo)
+    {                                                            // Início do bloco do 'if'
+        media = (n1 + n2 + n3) / 3.0;                            // Calcula média aritmética simples
+    }                                                            // Fim do bloco do 'if'
+    else if (tipo == 'P' || tipo == 'p')                         // Se o tipo for 'P' (maiúsculo ou minúsculo)
+    {                                                            // Início do bloco do 'else if'
+        media = ((n1 * 5) + (n2 * 3) + (n3 * 2)) / (5 + 3 + 2);  // Calcula média ponderada com pesos 5, 3 e 2
+    }                                                            // Fim do bloco do 'else if'
+    else                                                         // Caso a letra seja diferente de A ou P
+    {                                                            // Início do bloco do 'else'
+        printf("Letra invalida! Use 'A' para aritmetica ou 'P' para ponderada.\n");
+        media = -1;                                               // Atribui -1 para indicar erro
+    }                                                            // Fim do bloco do 'else'
+
+    return media;                                                 // Retorna o valor calculado (ou -1 em caso de erro)
+}                                                                // Fim da função 'calculaMedia'
+
+// --------------------------- Função principal ---------------------------
+int main()                                                       // Função principal do programa
+{                                                                // Início do bloco principal
+    double nota1, nota2, nota3;                                  // Declara três variáveis para armazenar as notas
+    char tipo;                                                   // Declara variável para armazenar a letra ('A' ou 'P')
+    double resultado;                                            // Variável para armazenar o resultado da média
+
+    printf("Digite as tres notas do aluno: ");                   // Solicita ao usuário que digite as 3 notas
+    scanf("%lf %lf %lf", &nota1, &nota2, &nota3);                // Lê as três notas digitadas
+
+    printf("Digite 'A' para media aritmetica ou 'P' para ponderada: ");  // Pede o tipo de média desejada
+    scanf(" %c", &tipo);                                         // Lê o caractere (com espaço antes para ignorar '\n')
+
+    resultado = calculaMedia(nota1, nota2, nota3, tipo);         // Chama a função e guarda o resultado em 'resultado'
+
+    if (resultado != -1)                                         // Verifica se o retorno é válido (diferente de erro)
+    {                                                            // Início do bloco do 'if'
+        printf("\nA media calculada eh: %.2lf\n", resultado);    // Exibe a média formatada com 2 casas decimais
+    }                                                            // Fim do bloco do 'if'
+
+    system("pause");
+    return 0;                                                    // Indica que o programa terminou com sucesso
+}                                                                // Fim da função principal
