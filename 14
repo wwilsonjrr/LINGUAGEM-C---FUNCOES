@@ -1,0 +1,63 @@
+/*
+14. Faça uma função que receba a distância (em km) e a quantidade de litros
+    de gasolina consumidos por um carro em um percurso.
+    Calcule o consumo em km/l e exiba uma mensagem conforme a tabela:
+
+    CONSUMO (Km/l)      MENSAGEM
+    menor que 8         Venda o carro!
+    entre 8 e 14        Econômico!
+    maior que 14        Super econômico!
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que calcula o consumo ---------------------------
+void verificaConsumo(double distancia, double litros)   // Declara a função que recebe dois valores double
+{                                                       // Início do bloco da função
+    double consumo;                                     // Variável para armazenar o consumo calculado
+
+    if (litros <= 0)                                    // Verifica se o valor de litros é válido
+    {                                                   // Início do bloco do 'if'
+        printf("Erro: quantidade de litros deve ser maior que zero.\n");  // Mensagem de erro
+        return;                                         // Sai da função imediatamente
+    }                                                   // Fim do bloco do 'if'
+
+    consumo = distancia / litros;                       // Calcula o consumo (km/l)
+
+    printf("\nConsumo medio: %.2lf km/l\n", consumo);   // Exibe o consumo médio formatado com duas casas decimais
+
+    // Avalia a categoria de consumo conforme a tabela fornecida
+    if (consumo < 8)                                   // Caso o consumo seja menor que 8 km/l
+    {
+        printf("Venda o carro!\n");                    // Exibe mensagem correspondente
+    }
+    else if (consumo <= 14)                            // Caso o consumo esteja entre 8 e 14 km/l
+    {
+        printf("Economico!\n");                        // Exibe mensagem correspondente
+    }
+    else                                               // Caso o consumo seja maior que 14 km/l
+    {
+        printf("Super economico!\n");                  // Exibe mensagem correspondente
+    }
+}                                                       // Fim da função 'verificaConsumo'
+
+// --------------------------- Função principal ----------------------------------------
+int main()                                              // Início da função principal
+{                                                       // Início do bloco principal
+    double km, litros;                                  // Declara duas variáveis double para distância e combustível
+
+
+    printf("Digite a distancia percorrida (em km): ");  // Solicita a distância percorrida
+    scanf("%lf", &km);                                  // Lê o valor digitado e armazena em 'km'
+
+    printf("Digite a quantidade de litros consumidos: "); // Solicita os litros consumidos
+    scanf("%lf", &litros);                                // Lê o valor digitado e armazena em 'litros'
+
+    verificaConsumo(km, litros);              // Chama a função passando os dois valores como parâmetros
+                                              // Nenhum valor volta // resultado = verificaConsumo(km, litros);  ❌ não faz sentido
+
+    system("pause");
+    return 0;                                           // Indica que o programa terminou corretamente
+}                                                       // Fim da função principal
