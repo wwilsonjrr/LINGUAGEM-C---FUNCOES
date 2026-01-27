@@ -1,0 +1,89 @@
+/*
+15. Programa que recebe três valores (maiores que zero) representando os lados de um triângulo.
+(a) Verifica se os lados formam um triângulo:
+    - Cada lado deve ser menor que a soma dos outros dois.
+(b) Se formarem um triângulo, determina e mostra o tipo:
+    - Equilátero: três lados iguais.
+
+    a == b → verdadeiro
+
+    b == c → verdadeiro
+
+    automaticamente a == c → verdadeiro
+
+    - Isósceles: dois lados iguais.
+    - Escaleno: três lados diferentes.
+*/
+
+#include <stdio.h>    // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>   // system("pause")
+
+// --------------------------- Função que verifica se é triângulo ---------------------------
+int formaTriangulo(double a, double b, double c)   // Recebe os três lados como parâmetros
+{                                                  // Início do bloco da função
+    // Condição básica para formar um triângulo:
+    // Cada lado deve ser menor que a soma dos outros dois
+    if ((a < b + c) && (b < a + c) && (c < a + b)) // Verifica as três condições
+    {
+        return 1;                                 // Retorna 1 (verdadeiro): forma um triângulo
+    }
+    else
+    {
+        return 0;                                 // Retorna 0 (falso): não forma um triângulo
+    }
+}                                                  // Fim da função 'formaTriangulo'
+
+// --------------------------- Função que determina o tipo de triângulo ---------------------------
+void tipoTriangulo(double a, double b, double c)   // Recebe os três lados como parâmetros
+{                                                  // Início do bloco da função
+    if (a == b && b == c)                         // Se todos os lados forem iguais
+    {
+        printf("O triangulo eh equilatero.\n");   // Exibe mensagem correspondente
+    }
+    else if (a == b || a == c || b == c)          // Se apenas dois lados forem iguais
+    {
+        printf("O triangulo eh isosceles.\n");    // Exibe mensagem correspondente
+    }
+    else                                          // Caso nenhum lado seja igual
+    {
+        printf("O triangulo eh escaleno.\n");     // Exibe mensagem correspondente
+    }
+    return;
+}                                                  // Fim da função 'tipoTriangulo'
+
+// --------------------------- Função principal ----------------------------------------------
+int main()                                         // Início da função principal
+{                                                  // Início do bloco principal
+    double lado1, lado2, lado3;                    // Declara três variáveis para armazenar os lados
+
+    // Solicita ao usuário que insira os três lados
+    printf("Digite o comprimento do primeiro lado: ");
+    scanf("%lf", &lado1);                          // Lê o primeiro valor
+
+    printf("Digite o comprimento do segundo lado: ");
+    scanf("%lf", &lado2);                          // Lê o segundo valor
+
+    printf("Digite o comprimento do terceiro lado: ");
+    scanf("%lf", &lado3);                          // Lê o terceiro valor
+
+    // Verifica se os lados são válidos (maiores que zero)
+    if (lado1 <= 0 || lado2 <= 0 || lado3 <= 0)
+    {
+        printf("Erro: todos os lados devem ser maiores que zero.\n");
+        return 0;                                  // Encerra o programa caso o valor seja inválido
+    }
+
+    // Verifica se os lados formam um triângulo // Pode tirar os printf da função e colocar no main, MAS isso muda o papel da função
+    if (formaTriangulo(lado1, lado2, lado3))       // Chama a função 'formaTriangulo'
+    {
+        printf("\nAs medidas formam um triangulo valido!\n");
+        tipoTriangulo(lado1, lado2, lado3);        // Chama a função que identifica o tipo
+    }
+    else
+    {
+        printf("\nAs medidas NAO formam um triangulo.\n");
+    }
+
+    system("pause");
+    return 0;                                      // Indica que o programa terminou corretamente
+}                                                  // Fim da função principal
