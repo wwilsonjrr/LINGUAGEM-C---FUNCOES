@@ -1,0 +1,62 @@
+/*
+17. Faça uma função que receba dois n´umeros inteiros positivos por parâmetro e retorne a
+soma dos N números inteiros existentes entre eles.
+*/
+
+#include <stdio.h>    // Biblioteca padrão de entrada e saída (necessária para printf)
+#include <stdlib.h>   // system("pause")
+
+
+//--- Função que calcula a soma ---//
+
+int somaEntre(int a, int b)
+{
+    int soma = 0; // variável acumuladora da soma
+    int i;        // variável de controle do laço
+
+    if(a <= 0 || b <= 0)
+    {
+        printf("Os numeros devem ser positivos.\n");
+        return 0;
+    }
+
+    if (a > b)
+    {
+        int temp = a;
+        a = b;
+        b = temp; // troca os valores (agora 'a' é o menor)
+    }
+
+    for (i= a+1; i < b; i++)
+    {
+        soma += i;
+    }
+
+    return soma;
+}
+
+//--- Função principal ---//
+
+int main()
+{
+    int num1, num2;
+    int resultado;
+
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &num1);
+
+    printf("Digite o segundo numero: ");
+    scanf("%d", &num2);
+
+
+    resultado = somaEntre(num1, num2);
+
+    printf("\nA soma dos numeros entre %d e %d eh: %d\n", num1, num2, resultado);
+
+    system("pause");
+    return 0;
+}
+
+
+
+
