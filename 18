@@ -1,0 +1,76 @@
+/*
+18. Faça uma função que receba por parâmetro dois valores X e Z.
+    Calcule e retorne o resultado de X^Z (X elevado a Z) para o programa principal.
+    Atenção: não utilize nenhuma função pronta de exponenciação (como pow()).
+
+condições de existência de uma função exponêncial:
+
+f(x) = a^x
+
+a > 0
+
+a != 1
+
+
+
+2^4
+
+resultado *= base;
+
+resultado *= base;
+
+resultado = resultado * base;
+
+resultado =     1     *   2     =      2
+
+resultado =     2     *   2     =      4
+
+resultado =     4     *   2     =      8
+
+resultado =     8     *   2     =     16
+
+*/
+
+#include <stdio.h>    // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula a potência ---------------------------
+int potencia(int base, int expoente)        // Declara a função que recebe dois inteiros e retorna um inteiro
+{                                            // Início do bloco da função
+    int resultado = 1;                       // Inicializa o resultado como 1 (neutro da multiplicação)
+    int i;                                   // Variável de controle do laço
+
+    if (expoente < 0)                        // Verifica se o expoente é negativo
+    {                                        // Início do bloco 'if'
+        printf("Expoente negativo nao suportado neste programa.\n");
+        return 0;                            // Retorna 0 como valor padrão para expoentes negativos
+    }                                        // Fim do bloco 'if'
+
+    for (i = 1; i <= expoente; i++)          // Laço repete 'expoente' vezes
+    {                                        // Início do bloco do 'for'
+        resultado *= base;                   // Multiplica o resultado pela base a cada iteração
+    }                                        // Fim do bloco do 'for'
+
+    return resultado;                        // Retorna o valor final de X^Z
+}                                            // Fim da função 'potencia'
+
+// --------------------------- Função principal -------------------------------------
+int main()                                   // Início da função principal
+{                                            // Início do bloco principal
+    int x, z;                                // Declara as variáveis base (X) e expoente (Z)
+    int res;                                 // Variável que armazenará o resultado
+
+    printf("Digite o valor da base (X): ");  // Solicita o valor da base
+    scanf("%d", &x);                         // Lê o valor digitado e armazena em 'x'
+
+    printf("Digite o valor do expoente (Z): "); // Solicita o valor do expoente
+    scanf("%d", &z);                         // Lê o valor digitado e armazena em 'z'
+
+    res = potencia(x, z);                    // Chama a função e guarda o retorno em 'res'
+
+    printf("\nO resultado de %d elevado a %d eh: %d\n", x, z, res);
+                                             // Exibe o resultado formatado
+
+    system("pause");
+    return 0;                                // Finaliza o programa corretamente
+}                                            // Fim da função principal
