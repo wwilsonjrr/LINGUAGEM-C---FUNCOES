@@ -1,0 +1,48 @@
+/*
+20. Faça um algoritmo que receba um número inteiro positivo n
+    e calcule o seu fatorial, n!.
+    O fatorial de n (representado por n!) é dado por:
+    n! = n × (n - 1) × (n - 2) × ... × 1
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>  // system("pause")
+
+// --------------------------- Função que calcula o fatorial ---------------------------
+long long fatorial(int n)                // Declara função que recebe um inteiro e retorna um número longo (long long)
+{                                        // Início do bloco da função
+    long long resultado = 1;             // Inicializa o resultado como 1 (neutro da multiplicação)
+
+    if (n < 0)                           // Verifica se o número é negativo
+    {                                    // Início do bloco if
+        printf("Nao existe fatorial de numero negativo.\n"); // Mensagem de erro
+        return -1;                       // Retorna -1 para indicar erro // Fatorial nunca é negativo
+    }                                    // Fim do bloco if
+
+    for (int i = 1; i <= n; i++)         // Laço que multiplica todos os inteiros de 1 até n
+    {                                    // Início do bloco for
+        resultado *= i;                  // Multiplica o resultado pelo valor atual de i // resultado = resultado * i
+    }                                    // Fim do bloco for
+
+    return resultado;                    // Retorna o resultado final do cálculo de n!
+}                                        // Fim da função fatorial
+
+// --------------------------- Função principal -------------------------------------
+int main()                               // Início da função principal
+{                                        // Início do bloco principal
+    int numero;                          // Declara variável para armazenar o número digitado
+    long long res;                       // Variável para armazenar o resultado do fatorial
+
+    printf("Digite um numero inteiro positivo: "); // Solicita entrada ao usuário
+    scanf("%d", &numero);                          // Lê o valor digitado
+
+    res = fatorial(numero);             // Chama a função 'fatorial' e armazena o retorno em 'res'
+
+    if (res != -1)                      // Verifica se o resultado não é um erro
+    {                                   // Início do bloco if
+        printf("O fatorial de %d eh: %lld\n", numero, res); // Exibe o resultado formatado
+    }                                   // Fim do bloco if
+
+    system("pause");
+    return 0;                           // Indica que o programa terminou com sucesso
+}                                       // Fim da função principal
