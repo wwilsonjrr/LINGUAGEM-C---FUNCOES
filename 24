@@ -1,0 +1,83 @@
+/*
+24. Escreva uma função que gera um triângulo de altura n e base 2*n - 1.
+    Exemplo para n = 6:
+          *
+         ***
+        *****
+       *******
+      *********
+     ***********
+
+     Resumo mental (pra nunca mais esquecer)
+
+     Laço externo (i) → controla a linha
+
+     Espaços = n - i → empurra para o centro
+
+     Estrelas = 2*i - 1 → forma o triângulo
+
+     \n → quebra a linha
+
+
+
+     printf(" ");
+     ele imprime um caractere espaço (' '), que:
+
+     não aparece visualmente
+
+     mas empurra o cursor para a direita
+
+
+     .....*
+     ....***
+     ...*****
+     ..*******
+     .*********
+     ***********
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que imprime o triângulo ---------------------------
+void trianguloCentralizado(int n)         // Declara a função que recebe um inteiro e não retorna nada (void)
+{                                         // Início do bloco da função
+    if (n <= 0)                           // Verifica se o número é inválido
+    {                                     // Início do bloco if
+        printf("Valor invalido. O numero deve ser positivo.\n");  // Mensagem de erro
+        return;                           // Sai da função sem executar o restante
+    }                                     // Fim do bloco if
+
+    for (int i = 1; i <= n; i++)          // Loop que percorre da primeira até a última linha
+    {                                     // Início do laço externo
+
+        // ----------- Espaços à esquerda para centralizar -----------
+        for (int espacos = 1; espacos <= n - i; espacos++)
+        {                                 // Início do laço de espaços
+            printf(" ");                  // Imprime um espaço para deslocar os asteriscos à direita
+        }                                 // Fim do laço de espaços
+
+        // ----------- Asteriscos -----------
+        for (int estrelas = 1; estrelas <= 2 * i - 1; estrelas++)
+        {                                 // Início do laço de asteriscos
+            printf("*");                  // Imprime um asterisco
+        }                                 // Fim do laço de asteriscos
+
+        printf("\n");                     // Pula para a próxima linha
+    }                                     // Fim do laço principal
+}                                         // Fim da função trianguloCentralizado
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int num;                                // Declara variável para armazenar a altura do triângulo
+
+    printf("Digite o valor de num: ");      // Solicita que o usuário informe a altura do triângulo
+    scanf("%d", &n);                      // Lê o valor digitado
+
+    trianguloCentralizado(num);             // Chama a função para gerar o triângulo
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}                                         // Fim da função principal
