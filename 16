@@ -1,0 +1,42 @@
+/*
+16. Faça uma função chamada DesenhaLinha.
+    Ela deve desenhar uma linha na tela usando vários símbolos de igual (=).
+    A função recebe por parâmetro quantos sinais de igual serão mostrados.
+    Exemplo: ========
+*/
+
+#include <stdio.h>    // Biblioteca padrão de entrada e saída (necessária para printf)
+#include <stdlib.h>   // system("pause")
+
+// --------------------------- Função que desenha a linha ---------------------------
+void DesenhaLinha(int quantidade)      // Declara a função que recebe a quantidade de sinais de '='
+{                                      // Início do bloco da função
+    int i;                             // Declara variável de controle para o laço
+
+    if (quantidade <= 0)               // Verifica se o número de sinais é inválido (zero ou negativo)
+    {                                  // Início do bloco 'if'
+        printf("Quantidade invalida!\n");  // Exibe mensagem de erro
+        return;                        // Sai da função sem desenhar nada
+    }                                  // Fim do bloco 'if'
+
+    for (i = 0; i < quantidade; i++)   // Laço que repete 'quantidade' vezes
+    {                                  // Início do bloco do 'for'
+        printf("=");                   // Imprime um sinal de igual a cada iteração
+    }                                  // Fim do bloco do 'for'
+
+    printf("\n");                      // Quebra de linha após o desenho
+}                                      // Fim da função 'DesenhaLinha'
+
+// --------------------------- Função principal -------------------------------------
+int main()                             // Função principal do programa
+{                                      // Início do bloco principal
+    int n;                             // Declara variável para armazenar a quantidade digitada pelo usuário
+
+    printf("Digite quantos sinais de igual deseja desenhar: ");  // Solicita a quantidade
+    scanf("%d", &n);                                            // Lê o valor digitado e armazena em 'n'
+
+    DesenhaLinha(n);                     // Chama a função passando 'n' como argumento
+
+    system("pause");
+    return 0;                            // Indica que o programa terminou corretamente
+}                                        // Fim da função principal
