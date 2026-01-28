@@ -1,0 +1,47 @@
+/*
+22. Crie uma função que receba como parâmetro um valor inteiro e
+    gere como saída n linhas com pontos de exclamação, conforme o exemplo abaixo.
+    Exemplo: para n = 5, a saída deve ser:
+    !
+    !!
+    !!!
+    !!!!
+    !!!!!
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que imprime o padrão ---------------------------
+void imprimeExclamacoes(int n)            // Declara a função que recebe um inteiro e não retorna nada (void)
+{                                         // Início do bloco da função
+    if (n <= 0)                           // Verifica se o valor informado é inválido (menor ou igual a zero)
+    {                                     // Início do bloco if
+        printf("Valor invalido. O numero deve ser positivo.\n");  // Exibe mensagem de erro
+        return;                           // Sai da função sem continuar
+    }                                     // Fim do bloco if
+
+    for (int i = 1; i <= n; i++)          // Laço externo: controla o número de linhas (de 1 até n)
+    {                                     // Início do laço externo
+        for (int j = 1; j <= i; j++)      // Laço interno: imprime 'i' pontos de exclamação na linha atual
+        {                                 // Início do laço interno
+            printf("!");                  // Imprime um ponto de exclamação sem pular linha
+        }                                 // Fim do laço interno
+
+        printf("\n");                     // Após imprimir uma linha, pula para a próxima linha
+    }                                     // Fim do laço externo
+}                                         // Fim da função imprimeExclamacoes
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int linhas;                           // Declara variável para armazenar o número de linhas desejadas
+
+    printf("Digite um numero inteiro positivo: "); // Solicita ao usuário o valor de n
+    scanf("%d", &linhas);                           // Lê o valor digitado e armazena na variável 'linhas'
+
+    imprimeExclamacoes(linhas);           // Chama a função para imprimir o padrão de exclamações
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}                                         // Fim da função principal
