@@ -1,0 +1,63 @@
+/*
+19. Faça uma função que retorne o maior fator primo de um número.
+   O programa deve receber um número inteiro positivo e determinar
+   qual é o maior número primo que o divide exatamente.
+*/
+
+#include <stdio.h>    // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que verifica se um número é primo ---------------------------
+int ehPrimo(int n)                        // Declara função que recebe um inteiro e retorna 1 (verdadeiro) ou 0 (falso)
+{                                         // Início do bloco da função
+    if (n < 2)                            // Números menores que 2 não são primos
+        return 0;                         // Retorna falso
+
+    for (int i = 2; i * i <= n; i++)      // Loop que testa divisores de 2 até a raiz de n    *******
+    {                                     // Início do laço
+        if (n % i == 0)                   // Se o número for divisível por i, não é primo
+            return 0;                     // Retorna falso
+    }                                     // Fim do laço
+
+    return 1;                             // Se passou por todos os testes, é primo
+}                                         // Fim da função ehPrimo
+
+// --------------------------- Função que encontra o maior fator primo ---------------------------
+int maiorFatorPrimo(int num)              // Declara função que recebe um número e retorna o maior fator primo
+{                                         // Início do bloco da função
+    int maior = -1;                       // Variável para armazenar o maior fator primo encontrado
+
+    for (int i = 2; i <= num; i++)        // Percorre todos os números de 2 até o próprio num
+    {                                     // Início do laço
+        if (num % i == 0 && ehPrimo(i))   // Verifica se i é divisor e também primo
+        {                                 // Início do 'if'
+            maior = i;                    // Atualiza o maior fator primo encontrado
+        }                                 // Fim do 'if'
+    }                                     // Fim do laço
+
+    return maior;                         // Retorna o maior fator primo encontrado
+}                                         // Fim da função maiorFatorPrimo
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int numero;                           // Declara variável para armazenar o número digitado
+    int resultado;                        // Variável para armazenar o maior fator primo
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita ao usuário o número
+    scanf("%d", &numero);                           // Lê o valor digitado
+
+    if (numero <= 1)                      // Verifica se o número é inválido
+    {                                     // Início do bloco 'if'
+        printf("Numero invalido. Deve ser maior que 1.\n");  // Mensagem de erro
+        return 0;                         // Encerra o programa
+    }                                     // Fim do bloco 'if'
+
+    resultado = maiorFatorPrimo(numero);  // Chama a função que encontra o maior fator primo
+
+    printf("O maior fator primo de %d eh: %d\n", numero, resultado);
+                                          // Exibe o resultado final
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}                                         // Fim da função principal
