@@ -1,0 +1,60 @@
+/*
+21. Escreva uma função para determinar a quantidade de números primos abaixo de N.
+   Exemplo: se N = 10 → números primos são 2, 3, 5 e 7 → total = 4.
+*/
+
+#include <stdio.h>     // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que verifica se um número é primo ---------------------------
+int ehPrimo(int n)                       // Declara uma função que recebe um inteiro e retorna 1 (verdadeiro) ou 0 (falso)
+{                                        // Início do bloco da função
+    if (n < 2)                           // Números menores que 2 não são primos
+        return 0;                        // Retorna falso (0)
+
+    for (int i = 2; i * i <= n; i++)     // Percorre de 2 até a raiz quadrada de n
+    {                                    // Início do laço for
+        if (n % i == 0)                  // Se n for divisível por i, não é primo
+            return 0;                    // Retorna falso (0)
+    }                                    // Fim do laço for
+
+    return 1;                            // Se nenhum divisor foi encontrado, é primo (retorna verdadeiro)
+}                                        // Fim da função ehPrimo
+
+// --------------------------- Função que conta primos abaixo de N ---------------------------
+int contaPrimosAbaixo(int N)             // Declara função que recebe um inteiro e retorna a quantidade de primos
+{                                        // Início do bloco da função
+    int contador = 0;                    // Inicializa o contador de primos
+
+    for (int i = 2; i < N; i++)          // Percorre todos os números de 2 até N-1
+    {                                    // Início do laço for
+        if (ehPrimo(i))                  // Se o número i for primo...
+            contador++;                  // ...incrementa o contador
+    }                                    // Fim do laço for
+
+    return contador;                     // Retorna a quantidade total de números primos encontrados
+}                                        // Fim da função contaPrimosAbaixo
+
+// --------------------------- Função principal -------------------------------------
+int main()                               // Início da função principal
+{                                        // Início do bloco principal
+    int numero;                               // Declara variável para armazenar o valor limite
+    int total;                           // Declara variável para armazenar o total de primos encontrados
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita o valor N ao usuário
+    scanf("%d", &numero);                                // Lê o valor digitado
+
+    if (numero <= 1)                          // Verifica se o número é inválido (menor ou igual a 1)
+    {                                    // Início do bloco if
+        printf("Nao existem numeros primos abaixo de %d.\n", numero);  // Mensagem de aviso
+        return 0;                        // Finaliza o programa
+    }                                    // Fim do bloco if
+
+    total = contaPrimosAbaixo(numero);        // Chama a função que conta os primos e guarda o resultado em 'total'
+
+    printf("Existem %d numeros primos abaixo de %d.\n", total, numero);
+                                         // Exibe o resultado formatado
+
+    system("pause");
+    return 0;                            // Indica que o programa terminou com sucesso
+}                                        // Fim da função principal
