@@ -1,0 +1,59 @@
+/*
+23. Escreva uma função que gera um triângulo lateral de altura 2*n - 1 e n de largura.
+    Exemplo: para n = 4, a saída será:
+
+    *
+    **
+    ***
+    ****
+    ***
+    **
+    *
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que imprime o triângulo lateral ---------------------------
+void trianguloLateral(int n)              // Define a função que recebe um inteiro e não retorna nada (void)
+{                                         // Início do bloco da função
+    if (n <= 0)                           // Verifica se o número é inválido
+    {                                     // Início do bloco if
+        printf("Valor invalido. O numero deve ser positivo.\n");  // Mensagem de erro
+        return;                           // Sai da função
+    }                                     // Fim do bloco if
+
+    // ---- Parte crescente do triângulo ----
+    for (int i = 1; i <= n; i++)          // Loop que vai de 1 até n (parte de cima)
+    {                                     // Início do laço externo
+        for (int j = 1; j <= i; j++)      // Loop interno: imprime i asteriscos por linha
+        {                                 // Início do laço interno
+            printf("*");                  // Imprime um asterisco sem pular linha
+        }                                 // Fim do laço interno
+        printf("\n");                     // Pula para a próxima linha
+    }                                     // Fim da parte crescente
+
+    // ---- Parte decrescente do triângulo ----
+    for (int i = n - 1; i >= 1; i--)      // Loop que vai de n-1 até 1 (parte de baixo)
+    {                                     // Início do laço externo
+        for (int j = 1; j <= i; j++)      // Loop interno: imprime i asteriscos por linha
+        {                                 // Início do laço interno
+            printf("*");                  // Imprime um asterisco sem quebra de linha
+        }                                 // Fim do laço interno
+        printf("\n");                     // Pula linha após imprimir uma linha de asteriscos
+    }                                     // Fim da parte decrescente
+}                                         // Fim da função trianguloLateral
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int num;                                // Declara variável para armazenar o valor de num
+
+    printf("Digite o valor de num: ");      // Solicita que o usuário informe o valor de num
+    scanf("%d", &num);                      // Lê o valor digitado e armazena em 'n'
+
+    trianguloLateral(num);                  // Chama a função para gerar o triângulo
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}                                         // Fim da função principal
