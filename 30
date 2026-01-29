@@ -1,0 +1,58 @@
+/*
+    30. Faça uma função que receba como parâmetro o valor de um ângulo em graus e calcule
+        o valor do seno hiperbólico desse ângulo usando a série de Taylor:
+        cosh(x) = Σ_{n=0}^{∞} [(x)^(2n) / (2n)!] = 1 - (x^2)/(2!) + (x^4)/(4!) - ... para todo x,
+        , onde x é o ângulo em radianos. Considerar π = 3.141593 e n variando de 0 até 5.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca para pow() e funções matemáticas
+
+#define PI 3.141593
+
+// --------------------------- Função fatorial ---------------------------
+long long fatorial(int n)                 // Função que calcula o fatorial de n
+{                                         // Início da função
+    long long fat = 1;                    // Inicializa o fatorial como 1 (netro da multiplicação)
+    for (int i = 1; i <= n; i++)          // Loop que multiplica de 1 até n
+    {                                     // Início do laço
+        fat *= i;                         // Multiplica o acumulador pelo valor atual // fat = fat * i
+    }                                     // Fim do laço
+    return fat;                           // Retorna o resultado final do fatorial
+}                                         // Fim da função fatorial
+
+// --------------------------- Função cosseno hiperbólico (série de Taylor) ---------------------------
+double cosseno_hiperbolico_taylor(double graus)  // Função principal para calcular cosh(x)
+{                                         // Início da função
+    double x = graus * (PI / 180.0);      // Converte o ângulo de graus para radianos
+
+    double coshx = 0;                     // Variável que acumulará o resultado final
+
+    for (int n = 0; n <= 5; n++)          // Laço da série de Taylor (n de 0 até 5)
+    {                                     // Início do laço
+        double termo = pow(x, 2 * n) / fatorial(2 * n);
+                                           // Calcula o termo da série: x^(2n) / (2n)!
+        coshx += termo;                   // Soma o termo ao total acumulado // coshx = coshx + termo
+    }                                     // Fim do laço
+
+    return coshx;                         // Retorna o valor aproximado do cosseno hiperbólico
+}                                         // Fim da função cosseno_hiperbolico_taylor
+
+// --------------------------- Função principal ---------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    double angulo;                        // Variável para armazenar o ângulo em graus
+    double resultado;                     // Variável para armazenar o resultado final
+
+    printf("Digite o angulo em graus: "); // Solicita ao usuário o valor do ângulo
+    scanf("%lf", &angulo);                // Lê o valor informado pelo usuário
+
+    resultado = cosseno_hiperbolico_taylor(angulo);  // Chama a função de cálculo
+
+    printf("Cosseno hiperbolico aproximado de %.2lf graus = %.6lf\n", angulo, resultado);
+                                           // Exibe o resultado formatado com 6 casas decimais
+
+    system("pause");
+    return 0;                             // Finaliza o programa corretamente
+}                                         // Fim da função principal
