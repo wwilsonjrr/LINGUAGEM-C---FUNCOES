@@ -1,0 +1,53 @@
+/*
+31. Faça uma função para calcular o número neperiano (e)
+    usando uma série de Taylor:
+    e = Σ_{n=0}^{∞} (1)/(n!) = 1 + 1/1! + 1/2! + 1/3! + ...
+    A função deve receber o número de termos a serem somados.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o fatorial ---------------------------
+long long fatorial(int n)                 // Define função que calcula o fatorial de n
+{                                         // Início da função
+    long long fat = 1;                    // Inicializa variável acumuladora com 1 (número neutro da multiplicação)
+    for (int i = 1; i <= n; i++)          // Laço que multiplica valores de 1 até n
+    {                                     // Início do laço for
+        fat *= i;                         // Multiplica o acumulador pelo valor atual // fat = fat * i
+    }                                     // Fim do laço for
+    return fat;                           // Retorna o valor final do fatorial
+}                                         // Fim da função fatorial
+
+// --------------------------- Função que calcula o número e ---------------------------
+double calcula_e(int termos)              // Função que calcula o número neperiano
+{                                         // Início da função
+    double e = 0.0;                       // Variável que acumulará o valor aproximado de e
+
+    for (int n = 0; n < termos; n++)      // Laço que soma a série até o número de termos informado
+    {                                     // Início do laço
+        termos = 1.0 / fatorial(n);
+
+        e += termos;                       // Soma o termo 1/n! à variável acumuladora // e = e + 1.0 / fatorial(n)
+    }                                     // Fim do laço
+
+    return e;                             // Retorna o valor final aproximado de e
+}                                         // Fim da função calcula_e
+
+// --------------------------- Função principal ---------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int t;                                // Variável para armazenar o número de termos
+    double resultado;                     // Variável para armazenar o valor aproximado de e
+
+    printf("Digite o numero de termos da serie: ");  // Solicita ao usuário o número de termos
+    scanf("%d", &t);                       // Lê o valor informado
+
+    resultado = calcula_e(t);              // Chama a função e guarda o valor retornado
+
+    printf("Valor aproximado de e com %d termos = %.10lf\n", t, resultado);
+                                           // Exibe o resultado com 10 casas decimais
+
+    system("pause");
+    return 0;                             // Finaliza o programa corretamente
+}                                         // Fim da função principal
