@@ -1,0 +1,49 @@
+/*
+25. Faça uma função que receba um inteiro N como parâmetro,
+    calcule e retorne o resultado da seguinte série:
+    S = 2/4 + 5/5 + 10/6 + ... + (N² + 1)/(N + 3)
+
+
+    O que conta mesmo na série, o que deve ser considerado no código é, (N² + 1)/(N + 3)
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula a série ---------------------------
+double calculaSerie(int N)                 // Função que recebe um inteiro e retorna um número real (double)
+{                                         // Início da função
+    if (N <= 0)                           // Verifica se o valor informado é inválido
+    {                                     // Início do bloco if
+        printf("Valor invalido. N deve ser positivo.\n");  // Exibe mensagem de erro
+        return 0;                         // Retorna 0 e encerra a função
+    }                                     // Fim do bloco if
+
+    double S = 0;                         // Variável acumuladora da soma da série (usa double por causa das divisões)
+
+    for (int i = 1; i <= N; i++)          // Laço que percorre de 1 até N
+    {                                     // Início do laço for
+        double numerador = (i * i) + 1;   // Calcula o numerador (i² + 1)
+        double denominador = i + 3;       // Calcula o denominador (i + 3)
+        S += numerador / denominador;     // Soma o termo atual à variável acumuladora
+    }                                     // Fim do laço for
+
+    return S;                             // Retorna o valor final da série
+}                                         // Fim da função calculaSerie
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int num;                                // Declara a variável que guardará o número digitado
+    double resultado;                     // Variável para armazenar o resultado da série
+
+    printf("Digite o valor de num: ");      // Solicita que o usuário digite um número inteiro
+    scanf("%d", &num);                      // Lê o valor informado
+
+    resultado = calculaSerie(num);          // Chama a função e armazena o resultado retornado
+
+    printf("O resultado da serie eh: %.4lf\n", resultado); // Exibe o resultado com 4 casas decimais
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}                                         // Fim da função principal
