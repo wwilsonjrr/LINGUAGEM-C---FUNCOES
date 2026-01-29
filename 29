@@ -1,0 +1,58 @@
+/*
+    29. Faça uma função que receba como parâmetro o valor de um ângulo em graus e calcule
+        o valor do seno hiperbólico desse ângulo usando a série de Taylor:
+        senh(x) = Σ_{n=0}^{∞} [(x)^(2n+1) / (2n+1)!] = x - (x^3)/(3!) + (x^5)/(5!) - ... para todo x,
+        , onde x é o ângulo em radianos. Considerar π = 3.141593 e n variando de 0 até 5.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca para usar pow() e funções matemáticas
+
+#define PI 3.141593
+
+// --------------------------- Função fatorial ---------------------------
+long long fatorial(int n)                 // Define função que calcula o fatorial de n
+{                                         // Início da função
+    long long fat = 1;                    // inicializa o resultado como 1 (netro da multiplicação)
+    for (int i = 1; i <= n; i++)          // Loop que multiplica de 2 até n
+    {                                     // Início do laço for
+        fat *= i;                         // Multiplica acumulador pelo valor atual // fata = fata * i
+    }                                     // Fim do laço for
+    return fat;                           // Retorna o resultado do fatorial
+}                                         // Fim da função fatorial
+
+// --------------------------- Função seno hiperbólico (série de Taylor) ---------------------------
+double seno_hiperbolico_taylor(double graus)   // Recebe ângulo em graus
+{                                         // Início da função
+    double x = graus * (PI / 180.0);      // Converte o ângulo de graus para radianos
+
+    double sinhx = 0;                     // Variável acumuladora do resultado final
+
+    for (int n = 0; n <= 5; n++)          // Laço da série (de n=0 até n=5)
+    {                                     // Início do laço
+        double termo = pow(x, 2 * n + 1) / fatorial(2 * n + 1);
+                                           // Calcula o termo da série: x^(2n+1)/(2n+1)!
+        sinhx += termo;                   // Soma o termo ao resultado acumulado // sinhx = sinhx + termo
+    }                                     // Fim do laço
+
+    return sinhx;                         // Retorna o valor aproximado do seno hiperbólico
+}                                         // Fim da função seno_hiperbolico_taylor
+
+// --------------------------- Função principal ---------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    double angulo;                        // Declara variável para armazenar o ângulo
+    double resultado;                     // Declara variável para armazenar o resultado
+
+    printf("Digite o angulo em graus: "); // Solicita o valor do ângulo
+    scanf("%lf", &angulo);                // Lê o valor informado
+
+    resultado = seno_hiperbolico_taylor(angulo);  // Chama a função de cálculo
+
+    printf("Seno hiperbolico aproximado de %.2lf graus = %.6lf\n", angulo, resultado);
+                                           // Exibe o resultado formatado
+
+    system("pause");
+    return 0;                             // Finaliza o programa corretamente
+}                                         // Fim da função principal
