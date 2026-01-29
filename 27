@@ -1,0 +1,60 @@
+/*
+       27. Faça uma função que receba como parâmetro o valor de um ângulo em graus e calcule
+       o valor do seno desse ângulo usando a série de Taylor:
+       sin(x) = Σ_{n=0}^{∞} [(-1)^n / (2n+1)!] · x^(2n+1) = x - (x^3)/(3!) + (x^5)/(5!) - ... para todo x,
+       , onde x é o ângulo em radianos. Considerar π = 3.141593 e n variando de 0 até 5.
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca para usar pow() e funções matemáticas
+
+#define PI 3.141593
+
+
+// --------------------------- Função fatorial ---------------------------
+long long fatorial(int n)                 // Função que calcula o fatorial de um número inteiro
+{                                         // Início do bloco da função
+    long long fat = 1;                    // inicializa o resultado como 1 (neutro da multiplicação)
+    for (int i = 1; i <= n; i++)          // Loop que multiplica todos os números de 1 até n
+    {                                     // Início do laço
+        fat *= i;                         // Multiplica o acumulador pelo número atual // fat = fat * i
+    }                                     // Fim do laço
+    return fat;                           // Retorna o resultado do fatorial
+}                                         // Fim da função fatorial
+
+// --------------------------- Função seno (usando série de Taylor) ---------------------------
+double seno_taylor(double graus)          // Função que calcula o seno a partir de um ângulo em graus
+{                                         // Início da função
+    double x = graus * (PI / 180.0);      // Converte o ângulo de graus para radianos
+
+    double seno = 0;                      // Variável acumuladora para o resultado da série
+
+    for (int n = 0; n <= 5; n++)          // Loop da série de Taylor (n de 0 até 5)
+    {                                     // Início do laço
+        double termo = pow(-1, n) * pow(x, 2 * n + 1) / fatorial(2 * n + 1);
+                                           // Calcula o termo da série: (-1)^n * x^(2n+1) / (2n+1)!
+        seno += termo;                    // Soma o termo ao resultado acumulado // seno = seno + termo
+    }                                     // Fim do laço
+
+    return seno;                          // Retorna o valor aproximado do seno
+}                                         // Fim da função seno_taylor
+
+// --------------------------- Função principal ---------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    double angulo;                        // Declara variável para o ângulo em graus
+    double resultado;                     // Declara variável para o valor do seno
+
+    printf("Digite o angulo em graus: "); // Solicita o valor do ângulo ao usuário
+    scanf("%lf", &angulo);                // Lê o valor digitado
+
+    resultado = seno_taylor(angulo);      // Chama a função que calcula o seno pela série de Taylor
+
+    printf("Seno aproximado de %.2lf graus = %.6lf\n", angulo, resultado);
+                                           // Exibe o resultado com 6 casas decimais
+
+    system("pause");
+    return 0;                             // Finaliza o programa corretamente
+}                                         // Fim da função principal
