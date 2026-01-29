@@ -1,0 +1,46 @@
+/*
+26. Faça um algoritmo que receba um número inteiro positivo n
+    e calcule o somatório de 1 até n.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o somatório ---------------------------
+int somatorio(int n)                      // Função que recebe um inteiro e retorna outro inteiro
+{                                         // Início do bloco da função
+    if (n <= 0)                           // Verifica se o número é inválido
+    {                                     // Início do bloco if
+        printf("Valor invalido. O numero deve ser positivo.\n");  // Mensagem de erro
+        return 0;                         // Retorna 0 e encerra a função
+    }                                     // Fim do bloco if
+
+    int soma = 0;                         // Declara e inicializa a variável acumuladora
+
+    for (int i = 1; i <= n; i++)          // Loop de 1 até n
+    {                                     // Início do laço for
+        soma += i;                        // Adiciona o valor de i à variável soma
+    }                                     // Fim do laço for
+
+    return soma;                          // Retorna o valor final da soma
+}                                         // Fim da função somatorio
+
+// --------------------------- Função principal -------------------------------------
+int main()                                // Início da função principal
+{                                         // Início do bloco principal
+    int num;                                // Declara variável para armazenar o valor digitado
+    int resultado;                        // Variável para armazenar o resultado do somatório
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita que o usuário digite o valor
+    scanf("%d", &num);                      // Lê o valor informado e armazena em num
+
+    resultado = somatorio(num);             // Chama a função somatorio e guarda o retorno
+
+    if (num > 0)                            // Verifica se o valor é válido para exibir resultado
+    {                                     // Início do bloco if
+        printf("O somatorio de 1 ate %d eh: %d\n", num, resultado);  // Mostra o resultado
+    }                                     // Fim do bloco if
+
+    system("pause");
+    return 0;                             // Finaliza o programa corretamente
+}                                         // Fim da função principal
