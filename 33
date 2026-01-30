@@ -1,0 +1,58 @@
+/*
+33. Faça uma função que receba um número N e retorne a soma dos algarismos de N!.
+    Exemplo: N = 4 → 4! = 24 → soma = 2 + 4 = 6.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o fatorial ---------------------------
+long long fatorial(int n)                   // Define função que calcula o fatorial de n
+{                                           // Início da função
+    long long fat = 1;                      // Inicializa variável acumuladora com 1 (número neutro em multiplicação)
+    for (int i = 1; i <= n; i++)            // Loop que multiplica de 1 até n
+    {                                       // Início do laço for
+        fat *= i;                           // Multiplica acumulando o resultado // fat = fat * i
+    }                                       // Fim do laço for
+    return fat;                             // Retorna o valor final do fatorial
+}                                           // Fim da função fatorial
+
+// --------------------------- Função que soma os algarismos de um número ---------------------------
+int soma_algarismos(long long num)          // Recebe um número inteiro longo
+{                                           // Início da função
+    int soma = 0;                           // Inicializa acumulador da soma com 0
+
+    while (num > 0)                         // Enquanto ainda houver dígitos
+    {                                       // Início do laço while
+        soma += num % 10;                   // Soma o último algarismo (resto da divisão por 10) // soma = soma + num % 10
+        num /= 10;                          // Remove o último dígito (divisão inteira por 10)   // num = num / 10
+    }                                       // Fim do laço while
+
+    return soma;                            // Retorna o total somado
+}                                           // Fim da função soma_algarismos
+
+// --------------------------- Função principal ---------------------------
+int main()                                  // Início da função principal
+{                                           // Início do bloco principal
+    int N;                                  // Variável para armazenar o valor de entrada
+    long long fat;                          // Variável para armazenar o fatorial
+    int resultado;                          // Variável para armazenar a soma dos dígitos
+
+    printf("Digite um numero inteiro N: "); // Solicita ao usuário um número inteiro
+    scanf("%d", &N);                        // Lê o valor digitado
+
+    if (N < 0)                              // Verifica se o número é negativo
+    {                                       // Início do if
+        printf("Nao existe fatorial de numero negativo.\n");  // Mensagem de erro
+        return 1;                           // Finaliza o programa com código de erro
+    }                                       // Fim do if
+
+    fat = fatorial(N);                      // Calcula o fatorial chamando a função
+    resultado = soma_algarismos(fat);       // Soma os algarismos chamando a outra função
+
+    printf("Fatorial de %d = %lld\n", N, fat);                // Exibe o fatorial calculado
+    printf("Soma dos algarismos de %d! = %d\n", N, resultado); // Exibe a soma dos dígitos
+
+    system("pause");
+    return 0;                               // Finaliza o programa corretamente
+}                                           // Fim da função principal
