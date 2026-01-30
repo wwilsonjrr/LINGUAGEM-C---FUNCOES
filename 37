@@ -1,0 +1,46 @@
+/*
+37. Faça uma função não-recursiva que receba um número inteiro positivo n
+    e retorne o hiperfatorial desse número.
+    O hiperfatorial é definido por:
+    H(n) = 1^1 * 2^2 * 3^3 * ... * n^n
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <math.h>    // Biblioteca matemática para usar pow()
+
+// --------------------------- Função que calcula o hiperfatorial ---------------------------
+long double hiperfatorial(int n)                // Define a função que retorna o hiperfatorial
+{                                               // Início da função
+    long double resultado = 1.0;                // Variável acumuladora, inicia em 1.0 (tipo longo)
+
+    for (int k = 1; k <= n; k++)                // Laço de repetição de 1 até n
+    {                                           // Início do laço for
+        resultado *= pow(k, k);                 // Multiplica o acumulador por k elevado a k
+    }                                           // Fim do laço for
+
+    return resultado;                           // Retorna o valor final do hiperfatorial
+}                                               // Fim da função hiperfatorial
+
+// --------------------------- Função principal ---------------------------
+int main()                                      // Início da função principal
+{                                               // Início do bloco principal
+    int n;                                      // Declara variável para armazenar o número
+    long double resultado;                      // Variável para armazenar o resultado (pode ser muito grande)
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita ao usuário o número n
+    scanf("%d", &n);                            // Lê o número digitado
+
+    if (n <= 0)                                 // Verifica se o número é positivo
+    {                                           // Início do if
+        printf("Erro: o numero deve ser positivo!\n"); // Exibe mensagem de erro
+        return 1;                               // Encerra o programa com erro
+    }                                           // Fim do if
+
+    resultado = hiperfatorial(n);               // Chama a função e guarda o resultado retornado
+
+    printf("O hiperfatorial de %d eh: %.0Lf\n", n, resultado); // Exibe o resultado sem casas decimais
+
+    system("pause");
+    return 0;                                   // Finaliza o programa corretamente
+}                                               // Fim da função principal
