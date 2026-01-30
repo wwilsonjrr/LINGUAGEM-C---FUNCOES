@@ -1,0 +1,52 @@
+/*
+35. Faça uma função não-recursiva que receba um número inteiro positivo n
+    e retorne o fatorial quádruplo desse número.
+    O fatorial quádruplo é dado por: (2n)! / n!
+*/
+
+#include <stdio.h>    // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o fatorial ---------------------------
+long long fatorial(int N)                     // Define função que calcula o fatorial
+{                                             // Início da função
+    long long fat = 1;                        // Inicializa o acumulador com 1
+    for (int i = 1; i <= N; i++)              // Loop de 1 até N
+    {                                         // Início do laço for
+        fat *= i;                             // Multiplica o acumulador por i
+    }                                         // Fim do laço for
+    return fat;                               // Retorna o valor calculado
+}                                             // Fim da função fatorial
+
+// --------------------------- Função que calcula o fatorial quádruplo ---------------------------
+long long fatorial_quadruplo(int n)           // Define função principal de cálculo
+{                                             // Início da função
+    long long numerador = fatorial(2 * n);    // Calcula (2n)!
+    long long denominador = fatorial(n);      // Calcula n!
+    long long resultado = numerador / denominador; // Divide os dois fatoriais
+
+    return resultado;                         // Retorna o resultado final
+}                                             // Fim da função fatorial_quadruplo
+
+// --------------------------- Função principal ---------------------------
+int main()                                    // Início da função principal
+{                                             // Início do bloco principal
+    int num;                                    // Declara variável para o número digitado
+    long long resultado;                      // Declara variável para o resultado final
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita o número ao usuário
+    scanf("%d", &num);                          // Lê o valor digitado
+
+    if (num <= 0)                               // Verifica se o número é positivo
+    {                                         // Início do if
+        printf("Erro: o numero deve ser positivo!\n"); // Mensagem de erro
+        return 1;                             // Encerra o programa com código de erro
+    }                                         // Fim do if
+
+    resultado = fatorial_quadruplo(num);        // Chama a função que calcula o fatorial quádruplo
+
+    printf("O fatorial quadruplo de %d eh: %lld\n", num, resultado); // Exibe o resultado final
+
+    system("pause");
+    return 0;                                 // Finaliza o programa corretamente
+}                                             // Fim da função principal
