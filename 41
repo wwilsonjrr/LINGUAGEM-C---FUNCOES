@@ -1,0 +1,57 @@
+/*
+41. Faça uma função que receba um vetor de inteiros
+    e retorne o maior valor.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Função que encontra e retorna o maior valor de um vetor
+// ------------------------------------------------------------
+int maiorValor(int vetor[], int tamanho)    // Recebe um vetor e o tamanho do vetor
+{
+    int maior = vetor[0];                   // Inicializa 'maior' com o primeiro elemento do vetor
+
+    // Percorre o vetor a partir do segundo elemento, porque o índice 0 já foi usado
+    for (int i = 1; i < tamanho; i++)       // Loop de i = 1 até i = tamanho - 1
+    {
+        if (vetor[i] > maior)               // Se o elemento atual for maior que o valor armazenado em 'maior'
+        {
+            maior = vetor[i];               // Atualiza o valor de 'maior' com o novo valor
+        }
+    }
+
+    return maior;                           // Retorna o maior valor encontrado no vetor
+}
+
+// ------------------------------------------------------------
+// Função principal — ponto de entrada do programa
+// ------------------------------------------------------------
+int main()
+{
+    int n;                                  // Variável que armazenará o tamanho do vetor
+
+    // Solicita o tamanho do vetor ao usuário
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &n);                        // Lê o valor digitado e guarda em 'n'
+
+    int vetor[n];                           // Declara um vetor de tamanho variável (VLA)
+
+    // Leitura dos elementos do vetor
+    printf("Digite %d numeros inteiros:\n", n);
+    for (int i = 0; i < n; i++)             // Loop para ler cada elemento
+    {
+        printf("Elemento [%d]: ", i);       // Exibe o índice do elemento
+        scanf("%d", &vetor[i]);             // Lê o valor e armazena na posição correspondente
+    }
+
+    // Chama a função para encontrar o maior valor do vetor
+    int maior = maiorValor(vetor, n);
+
+    // Exibe o resultado final
+    printf("\nO maior valor do vetor eh: %d\n", maior);
+
+    system("pause");
+    return 0;                               // Encerra o programa com sucesso
+}
