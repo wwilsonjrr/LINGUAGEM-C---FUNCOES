@@ -1,0 +1,64 @@
+/*
+32. Faça uma função chamada 'simplifica' que recebe como parâmetro o numerador
+    e o denominador de uma fração. Esta função deve simplificar a fração
+    dividindo ambos pelo maior divisor comum possível (MDC).
+    Exemplo: 36/60 → 3/5.
+*/
+
+#include <stdio.h>    // Biblioteca padrão para entrada e saída
+#include <stdlib.h>   // Biblioteca padrão do sistema
+
+// --------------------------- Função que calcula o MDC ---------------------------
+// Recebe dois números inteiros e retorna o Máximo Divisor Comum
+int mdc(int a, int b)
+{
+    while (b != 0)            // Enquanto b for diferente de zero
+    {
+        int resto = a % b;    // Calcula o resto da divisão de a por b
+        a = b;                // O divisor vira o novo dividendo
+        b = resto;            // O resto vira o novo divisor
+    }
+
+    return a;                 // Quando b chega a zero, a contém o MDC
+}
+
+// --------------------------- Função que simplifica a fração ---------------------------
+// Recebe os ENDEREÇOS do numerador e do denominador
+// Isso permite alterar as variáveis originais da função main
+void simplifica(int *num, int *den)
+{
+    int divisor = mdc(*num, *den);   // Usa os VALORES apontados por num e den
+
+    *num = *num / divisor;           // Atualiza o valor do numerador
+    *den = *den / divisor;           // Atualiza o valor do denominador
+}
+
+// --------------------------- Função principal ---------------------------
+int main()
+{
+    int numerador, denominador;      // Variáveis da fração
+
+    printf("Digite o numerador: ");
+    scanf("%d", &numerador);         // & → passa o endereço da variável
+
+    printf("Digite o denominador: ");
+    scanf("%d", &denominador);       // & → passa o endereço da variável
+
+    if (denominador == 0)            // Verifica fração inválida
+    {
+        printf("Erro: denominador nao pode ser zero!\n");
+
+        // return 0; → programa terminou com sucesso
+        // return 1; (ou qualquer valor ≠ 0) → programa terminou com erro
+        return 1;
+    }
+
+    // Passa os ENDEREÇOS das variáveis para a função
+    simplifica(&numerador, &denominador);
+
+    // As variáveis já vêm modificadas
+    printf("Fracao simplificada: %d/%d\n", numerador, denominador);
+
+    system("pause");
+    return 0;
+}
