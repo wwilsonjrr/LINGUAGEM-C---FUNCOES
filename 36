@@ -1,0 +1,59 @@
+/*
+36. Faça uma função não-recursiva que receba um número inteiro positivo N
+    e retorne o superfatorial desse número.
+    O superfatorial é definido como o produto dos N primeiros fatoriais:
+    sf(N) = 1! * 2! * 3! * ... * N!
+    Exemplo: sf(4) = 1 * 2 * 6 * 24 = 288
+*/
+
+#include <stdio.h>    // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o fatorial ---------------------------
+long long fatorial(int n)                  // Define uma função que calcula o fatorial de n
+{                                          // Início da função
+    long long fat = 1;                     // Inicializa variável acumuladora com 1
+
+    for (int i = 1; i <= n; i++)           // Loop de 1 até n (1 é neutro na multiplicação)
+    {                                      // Início do laço for
+        fat *= i;                          // Multiplica o valor acumulado por i
+    }                                      // Fim do laço for
+
+    return fat;                            // Retorna o valor final do fatorial
+}                                          // Fim da função fatorial
+
+// --------------------------- Função que calcula o superfatorial ---------------------------
+long long superfatorial(int N)             // Define a função que calcula o superfatorial
+{                                          // Início da função
+    long long resultado = 1;               // Inicializa o acumulador com 1
+
+    for (int i = 1; i <= N; i++)           // Loop que vai de 1 até N
+    {                                      // Início do laço for
+        resultado *= fatorial(i);          // Multiplica pelo fatorial de cada número i
+    }                                      // Fim do laço for
+
+    return resultado;                      // Retorna o valor final do superfatorial
+}                                          // Fim da função superfatorial
+
+// --------------------------- Função principal ---------------------------
+int main()                                 // Início da função principal
+{                                          // Início do bloco principal
+    int num;                                 // Declara variável para armazenar o número informado
+    long long resultado;                   // Variável para guardar o resultado final
+
+    printf("Digite um numero inteiro positivo: ");  // Solicita ao usuário um número positivo
+    scanf("%d", &num);                       // Lê o número digitado
+
+    if (num <= 0)                            // Verifica se o número é positivo
+    {                                      // Início do if
+        printf("Erro: o numero deve ser positivo!\n");  // Mensagem de erro
+        return 1;                          // Encerra o programa com código de erro
+    }                                      // Fim do if
+
+    resultado = superfatorial(num);          // Chama a função superfatorial e guarda o resultado
+
+    printf("O superfatorial de %d eh: %lld\n", num, resultado);  // Exibe o resultado na tela
+
+    system("pause");
+    return 0;                              // Finaliza o programa com sucesso
+}                                          // Fim da função principal
