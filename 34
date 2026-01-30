@@ -1,0 +1,51 @@
+/*
+34. Faça uma função não-recursiva que receba um número inteiro positivo ímpar N
+    e retorne o fatorial duplo desse número.
+    O fatorial duplo é definido como o produto de todos os números ímpares de 1 até N.
+    Exemplo: 5!! = 1 * 3 * 5 = 15
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// --------------------------- Função que calcula o fatorial duplo ---------------------------
+long long fatorial_duplo(int n)              // Define a função que calcula o fatorial duplo
+{                                            // Início da função
+    long long resultado = 1;                 // Inicializa variável acumuladora com 1
+
+    for (int i = 1; i <= n; i += 2)          // Laço que percorre apenas números ímpares (1, 3, 5, ...)
+    {                                        // Início do laço for
+        resultado *= i;                      // Multiplica o acumulador pelo valor atual de i
+    }                                        // Fim do laço for
+
+    return resultado;                        // Retorna o valor final do fatorial duplo
+}                                            // Fim da função fatorial_duplo
+
+// --------------------------- Função principal ---------------------------
+int main()                                   // Início da função principal
+{                                            // Início do bloco principal
+    int N;                                   // Declara variável para o número informado
+    long long resultado;                     // Variável para armazenar o resultado do cálculo
+
+    printf("Digite um numero inteiro positivo impar: ");  // Solicita ao usuário um número
+    scanf("%d", &N);                         // Lê o valor informado
+
+    if (N <= 0)                              // Verifica se o número é positivo
+    {                                        // Início do if
+        printf("Erro: o numero deve ser positivo!\n");    // Mensagem de erro
+        return 1;                            // Encerra o programa com código de erro
+    }                                        // Fim do if
+
+    if (N % 2 == 0)                          // Verifica se o número é par
+    {                                        // Início do if
+        printf("Erro: o numero deve ser impar!\n");       // Mensagem de erro
+        return 1;                            // Encerra o programa com código de erro
+    }                                        // Fim do if
+
+    resultado = fatorial_duplo(N);           // Chama a função e armazena o resultado
+
+    printf("O fatorial duplo de %d eh: %lld\n", N, resultado); // Exibe o resultado final
+
+    system("pause");
+    return 0;                                // Finaliza o programa com sucesso
+}                                            // Fim da função principal
