@@ -1,0 +1,47 @@
+/*
+39. Faça uma função ‘Troque’ que receba duas variáveis reais A e B e troque
+    o valor delas (isto é, A recebe o valor de B e B recebe o valor de A).
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados (printf, scanf)
+#include <stdlib.h>
+
+// ----------------------------------------------------------
+// Função Troque — responsável por inverter os valores de A e B
+// ----------------------------------------------------------
+void Troque(float *A, float *B)    // A função recebe os ENDEREÇOS das variáveis A e B
+{                                  // Início do bloco da função
+    float temp;                    // Declara uma variável temporária para auxiliar na troca
+
+    temp = *A;                     // Armazena o valor de A na variável temporária
+    *A = *B;                       // A recebe o valor de B (desreferenciação de ponteiro)
+    *B = temp;                     // B recebe o valor que estava em A (guardado em temp)
+}                                  // Fim do bloco da função Troque
+
+// ----------------------------------------------------------
+// Função principal — ponto de entrada do programa
+// ----------------------------------------------------------
+int main()                         // Início da função principal
+{
+    float A, B;                    // Declara duas variáveis reais (float) A e B
+
+    // Entrada dos valores
+    printf("Digite o valor de A: ");  // Solicita ao usuário o valor de A
+    scanf("%f", &A);                 // Lê o valor digitado e armazena em A
+
+    printf("Digite o valor de B: ");  // Solicita ao usuário o valor de B
+    scanf("%f", &B);                 // Lê o valor digitado e armazena em B
+
+    // Exibe os valores antes da troca
+    printf("\nAntes da troca: A = %.2f, B = %.2f\n", A, B);
+
+    // Chama a função Troque, passando os endereços de A e B
+    // Assim, a função consegue modificar diretamente os valores originais
+    Troque(&A, &B);
+
+    // Exibe os valores depois da troca
+    printf("Depois da troca: A = %.2f, B = %.2f\n", A, B);
+
+    system("pause");
+    return 0;                       // Encerra o programa com sucesso
+}                                   // Fim do bloco da função principal
