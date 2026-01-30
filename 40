@@ -1,0 +1,57 @@
+/*
+40. Faça uma função que receba um vetor de inteiros e retorne
+    quantos valores pares ele possui.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados (printf, scanf)
+#includde <stdlib.h>
+
+// ------------------------------------------------------------
+// Função que conta quantos números pares existem em um vetor
+// ------------------------------------------------------------
+int contarPares(int vetor[], int tamanho)   // Função recebe o vetor e seu tamanho
+{
+    int contador = 0;                       // Variável para contar quantos pares existem
+
+    // Percorre o vetor elemento por elemento
+    for (int i = 0; i < tamanho; i++)       // Loop de 0 até tamanho - 1
+    {
+        if (vetor[i] % 2 == 0)              // Se o elemento atual for divisível por 2
+        {
+            contador++;                     // Incrementa o contador de pares
+        }
+    }
+
+    return contador;                        // Retorna o total de números pares encontrados
+}
+
+// ------------------------------------------------------------
+// Função principal (main) — ponto de entrada do programa
+// ------------------------------------------------------------
+int main()
+{
+    int n;                                  // Variável que armazenará o tamanho do vetor
+
+    // Solicita ao usuário o tamanho do vetor
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &n);                        // Lê o tamanho digitado pelo usuário
+
+    int vetor[n];                           // Declara o vetor com tamanho n (VLA — variável local)
+
+    // Leitura dos elementos do vetor
+    printf("Digite %d numeros inteiros:\n", n);
+    for (int i = 0; i < n; i++)             // Loop para preencher o vetor
+    {
+        printf("Elemento [%d]: ", i);       // Exibe o índice do elemento
+        scanf("%d", &vetor[i]);             // Lê o valor e armazena no vetor
+    }
+
+    // Chama a função para contar os pares e guarda o resultado
+    int quantidadePares = contarPares(vetor, n);
+
+    // Exibe o resultado na tela
+    printf("\nO vetor possui %d numeros pares.\n", quantidadePares);
+
+    system("pause");
+    return 0;                               // Retorna 0 indicando término normal do programa
+}
