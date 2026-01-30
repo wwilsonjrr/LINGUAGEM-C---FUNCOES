@@ -1,0 +1,59 @@
+/*
+38. Faça uma função não-recursiva que receba um número inteiro positivo n
+    e retorne o fatorial exponencial desse número.
+    O fatorial exponencial é definido como:
+    n$ = n^(n-1)^(n-2)^...^1
+    Exemplo: 4$ = 4^(3^(2^1)) = 4^(3^2) = 4^9 = 262144
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída (printf, scanf)
+#include <stdlib.h>
+#include <math.h>    // Biblioteca matemática (necessária para usar a função pow())
+
+// ------------------------------------------------------------
+// Função que calcula o fatorial exponencial de um número inteiro positivo
+// ------------------------------------------------------------
+long double fatorial_exponencial(int n)   // Define a função com retorno long double e parâmetro n (inteiro)
+{
+    long double resultado = 1.0;          // Inicializa variável acumuladora com 1 (neutro da potenciação)
+
+    // Loop crescente: começa em 1 e vai até n
+    // Esse sentido é fundamental, pois precisamos construir a torre de potências de baixo para cima.
+    for (int i = 1; i <= n; i++)          // i começa em 1 e é incrementado até chegar em n
+    {
+        resultado = pow(i, resultado);    // A cada passo, eleva i à potência do valor atual de resultado
+                                          // Exemplo: se n=4 → (1^1)=1 → (2^1)=2 → (3^2)=9 → (4^9)=262144
+    }
+
+    return resultado;                     // Retorna o valor final calculado após o laço
+}
+
+// ------------------------------------------------------------
+// Função principal - ponto de entrada do programa
+// ------------------------------------------------------------
+int main()                                // Início da função principal
+{
+    int N;                                // Declara variável n para armazenar o número digitado pelo usuário
+    long double resultado;                // Variável para armazenar o resultado final (pode ser muito grande)
+
+    // Solicita ao usuário que insira um número
+    printf("Digite um numero inteiro positivo: ");  // Exibe mensagem de entrada no console
+    scanf("%d", &N);                      // Lê o número digitado e armazena em n
+
+    // Verificação de entrada inválida
+    if (N <= 0)                           // Se n for menor ou igual a zero
+    {
+        printf("Erro: o numero deve ser positivo!\n"); // Exibe mensagem de erro
+        return 1;                         // Sai do programa com código de erro (1)
+    }
+
+    // Chamada da função fatorial_exponencial
+    resultado = fatorial_exponencial(N);  // Envia n como argumento e guarda o valor retornado em resultado
+
+    // Exibe o resultado formatado
+    // %.0Lf → imprime long double sem casas decimais (pois o resultado é inteiro)
+    printf("O fatorial exponencial de %d eh: %.0Lf\n", N, resultado);
+
+    system("pause");
+    return 0;                             // Retorna 0 indicando que o programa terminou corretamente
+}
