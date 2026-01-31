@@ -1,0 +1,72 @@
+/*
+44. Faça uma função que receba como parâmetro um vetor X de 30 elementos inteiros
+    e retorne, também por parâmetro, dois vetores A e B.
+    O vetor A deve conter os elementos pares de X e o vetor B, os elementos ímpares.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+// ------------------------------------------------------------
+// Função que separa os números pares e ímpares de um vetor
+// ------------------------------------------------------------
+void separaParesImpares(int X[], int tamanho, int A[], int *tamA, int B[], int *tamB)
+{
+    *tamA = 0;  // Inicializa o tamanho de A com 0 (usando ponteiro)
+    *tamB = 0;  // Inicializa o tamanho de B com 0 (usando ponteiro)
+
+    // Percorre todos os elementos do vetor X
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (X[i] % 2 == 0)           // Verifica se o elemento é par
+        {
+            A[*tamA] = X[i];         // Armazena no vetor A
+            (*tamA)++;               // Incrementa o contador de elementos pares
+        }
+        else                         // Caso contrário, o número é ímpar
+        {
+            B[*tamB] = X[i];         // Armazena no vetor B
+            (*tamB)++;               // Incrementa o contador de elementos ímpares
+        }
+    }
+}
+
+// ------------------------------------------------------------
+// Função principal — ponto de entrada do programa
+// ------------------------------------------------------------
+int main()
+{
+    int X[30];                       // Declara o vetor principal com 30 elementos
+    int A[30], B[30];                // Declara os vetores que receberão pares e ímpares
+    int tamA, tamB;                  // Variáveis para armazenar os tamanhos de A e B
+
+    // Leitura dos valores do vetor X
+    printf("Digite 30 numeros inteiros:\n");
+    for (int i = 0; i < 30; i++)     // Loop para preencher o vetor X
+    {
+        printf("X[%d]: ", i);        // Mostra o índice atual
+        scanf("%d", &X[i]);          // Lê o número e armazena no vetor X
+    }
+
+    // Chama a função que separa pares e ímpares
+    separaParesImpares(X, 30, A, &tamA, B, &tamB);
+
+    // Exibe o vetor A (pares)
+    printf("\nElementos pares (vetor A):\n");
+    for (int i = 0; i < tamA; i++)   // Percorre o vetor A até seu tamanho real
+    {
+        printf("%d ", A[i]);         // Imprime cada elemento par
+    }
+
+    // Exibe o vetor B (ímpares)
+    printf("\n\nElementos impares (vetor B):\n");
+    for (int i = 0; i < tamB; i++)   // Percorre o vetor B até seu tamanho real
+    {
+        printf("%d ", B[i]);         // Imprime cada elemento ímpar
+    }
+
+    printf("\n");                    // Quebra de linha final para estética
+
+    system("pause");
+    return 0;                        // Encerra o programa com sucesso
+}
