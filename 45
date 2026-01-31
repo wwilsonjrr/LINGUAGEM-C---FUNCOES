@@ -1,0 +1,94 @@
+/*
+45. Faça uma função que calcule o desvio padrão amostral de um vetor v contendo n números reais.
+
+Fórmula:
+        DP = sqrt( (1 / (n - 1)) * Σ (v[i] - m)² ), onde i = 1 até n
+        e m = (1 / n) * Σ v[i]
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+#include <math.h>    // Biblioteca matemática (usada para pow() e sqrt())
+
+// ---------------------------------------------------------------
+// Função que calcula a média dos elementos do vetor
+// ---------------------------------------------------------------
+float calcularMedia(float v[], int n)
+{
+    float soma = 0;                       // Inicializa a variável soma com 0
+
+    // Percorre o vetor e soma todos os elementos
+    for (int i = 0; i < n; i++)
+    {
+        soma += v[i];                     // Acumula o valor do elemento atual em soma
+    }
+
+    return soma / n;                      // Retorna a média (soma dividida pelo total de elementos)
+}
+
+// ---------------------------------------------------------------
+// Função que calcula o desvio padrão amostral do vetor
+// ---------------------------------------------------------------
+float calcularDesvioPadrao(float v[], int n)
+{
+    float media = calcularMedia(v, n);    // Chama a função de média e armazena em 'media'
+    float somaQuadrados = 0;              // Variável para armazenar a soma dos quadrados das diferenças
+
+    printf("\n--- Etapas do calculo ---\n");
+    printf("Media (m) = %.4f\n", media); // Exibe a média calculada
+
+    // Percorre o vetor novamente para calcular (v[i] - m)²
+    for (int i = 0; i < n; i++)
+    {
+        float diferenca = v[i] - media;           // Calcula a diferença entre o elemento e a média
+        float quadrado = pow(diferenca, 2);       // Eleva a diferença ao quadrado
+        somaQuadrados += quadrado;                // Acumula o resultado em somaQuadrados
+
+        // Exibe o cálculo passo a passo de cada termo
+        printf("Elemento %d: (%.2f - %.2f)^2 = %.4f\n", i + 1, v[i], media, quadrado);
+    }
+
+    // Calcula a variância amostral (dividindo por n - 1)
+    float variancia = somaQuadrados / (n - 1);
+
+    // Calcula o desvio padrão (raiz quadrada da variância)
+    float desvioPadrao = sqrt(variancia);
+
+    // Exibe os resultados intermediários
+    printf("\nSoma dos quadrados = %.4f", somaQuadrados);
+    printf("\nVariância (S^2) = %.4f", variancia);
+    printf("\nDesvio padrão (S) = %.4f\n", desvioPadrao);
+
+    return desvioPadrao;                  // Retorna o valor final do desvio padrão
+}
+
+// ---------------------------------------------------------------
+// Função principal — executa o programa
+// ---------------------------------------------------------------
+int main()
+{
+    int n;                                // Variável para armazenar o número de elementos
+    printf("Digite a quantidade de elementos do vetor: ");
+    scanf("%d", &n);                      // Lê o tamanho do vetor
+
+    float v[n];                           // Declara o vetor com n posições
+
+    // Lê os valores do vetor informados pelo usuário
+    printf("Digite os %d valores do vetor:\n", n);
+    for (int i = 0; i < n; i++)
+    {
+        printf("v[%d] = ", i + 1);
+        scanf("%f", &v[i]);               // Armazena cada valor digitado em v[i]
+    }
+
+    // Chama a função que calcula o desvio padrão
+    float dp = calcularDesvioPadrao(v, n);
+
+    // Exibe o resultado final
+    printf("\n==============================\n");
+    printf("Desvio padrao final = %.4f\n", dp);
+    printf("==============================\n");
+
+    system("pause");
+    return 0;                             // Finaliza o programa com sucesso
+}
