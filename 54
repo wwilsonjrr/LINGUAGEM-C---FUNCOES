@@ -1,0 +1,57 @@
+/*
+54. Faça uma função que recebe, por parâmetro, uma matriz A[4][4]
+    e retorna a soma dos seus elementos.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma de todos os elementos de uma matriz 4x4
+// -----------------------------------------------------------------------------
+int somaElementosMatriz(int A[4][4])
+{
+    int soma = 0;                        // Inicializa a variável acumuladora
+
+    // Percorre todas as linhas da matriz
+    for (int i = 0; i < 4; i++)
+    {
+        // Percorre todas as colunas da matriz
+        for (int j = 0; j < 4; j++)
+        {
+            soma += A[i][j];             // Soma o valor atual à variável soma
+        }
+    }
+
+    return soma;                         // Retorna o total da soma
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int X[4][4];                         // Declara uma matriz 4x4 de inteiros
+
+    // Solicita que o usuário digite os elementos da matriz
+    printf("Digite os elementos da matriz 4x4:\n");
+
+    // Preenche a matriz com os valores informados
+    for (int i = 0; i < 4; i++)          // Percorre as linhas
+    {
+        for (int j = 0; j < 4; j++)      // Percorre as colunas
+        {
+            printf("X[%d][%d] = ", i, j);
+            scanf("%d", &X[i][j]);       // Lê o elemento digitado pelo usuário
+        }
+    }
+
+    // Chama a função que calcula a soma dos elementos
+    int resultado = somaElementosMatriz(X);
+
+    // Exibe o resultado final
+    printf("\nA soma de todos os elementos da matriz eh: %d\n", resultado);
+
+    system("pause");
+    return 0;                            // Finaliza o programa corretamente
+}
