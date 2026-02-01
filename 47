@@ -1,0 +1,61 @@
+/*
+47. Faça uma função que receba uma matriz 4 x 4 e retorne quantos valores maiores do que 10 ela possui.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados (printf, scanf)
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que conta quantos valores da matriz são maiores que 10
+// -----------------------------------------------------------------------------
+int contaMaioresQue10(int matriz[4][4])
+{
+    int contador = 0;                        // Variável para contar quantos números são > 10
+
+    // Laço externo percorre as linhas da matriz (0 a 3)
+    for (int i = 0; i < 4; i++)
+    {
+        // Laço interno percorre as colunas da matriz (0 a 3)
+        for (int j = 0; j < 4; j++)
+        {
+            // Verifica se o elemento atual é maior que 10
+            if (matriz[i][j] > 10)
+            {
+                contador++;                  // Incrementa o contador se a condição for verdadeira
+            }
+        }
+    }
+
+    return contador;                         // Retorna o total de valores maiores que 10
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main) — ponto de entrada do programa
+// -----------------------------------------------------------------------------
+int main()
+{
+    int MATRIZ[4][4];                        // Declara uma matriz 4x4 de inteiros
+    int i, j;                                // Variáveis auxiliares para os índices da matriz
+
+    // Solicita ao usuário que digite os elementos da matriz
+    printf("Digite os elementos da matriz 4x4:\n");
+
+    // Laço duplo para leitura dos 16 elementos da matriz
+    for (i = 0; i < 4; i++)                  // Percorre as linhas
+    {
+        for (j = 0; j < 4; j++)              // Percorre as colunas
+        {
+            printf("matriz[%d][%d] = ", i, j); // Exibe a posição que está sendo lida
+            scanf("%d", &MATRIZ[i][j]);        // Lê o valor digitado e armazena na matriz
+        }
+    }
+
+    // Chama a função que conta os valores maiores que 10 e armazena o retorno
+    int resultado = contaMaioresQue10(MATRIZ);
+
+    // Exibe o resultado final
+    printf("\nA matriz possui %d valores maiores do que 10.\n", resultado);
+
+    system("pause");
+    return 0;                                // Encerra o programa com sucesso
+}
