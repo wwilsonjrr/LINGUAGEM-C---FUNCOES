@@ -1,0 +1,89 @@
+/*
+53. Faça uma função que verifica se uma matriz quadrada de ordem N é a matriz identidade.
+
+
+1 0 0
+0 1 0
+0 0 1
+
+
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que verifica se uma matriz é identidade
+// -----------------------------------------------------------------------------
+int ehIdentidade(int N, int matriz[N][N])
+{
+    // Percorre as linhas da matriz
+    for (int i = 0; i < N; i++)
+    {
+        // Percorre as colunas da matriz
+        for (int j = 0; j < N; j++)
+        {
+            // Caso a posição esteja na diagonal principal
+            if (i == j)
+            {
+                // Verifica se o elemento da diagonal é diferente de 1
+                if (matriz[i][j] != 1)
+                {
+                    return 0;  // Se não for 1, não é identidade → retorna 0
+                }
+            }
+            else  // Caso a posição esteja fora da diagonal principal
+            {
+                // Verifica se o elemento fora da diagonal é diferente de 0
+                if (matriz[i][j] != 0)
+                {
+                    return 0;  // Se não for 0, também não é identidade → retorna 0
+                }
+            }
+        }
+    }
+
+    // Se passou por todos os testes, é uma matriz identidade
+    return 1;  // Retorna 1 (verdadeiro)
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int num;  // Variável que armazenará a ordem da matriz
+
+    // Solicita a ordem da matriz quadrada ao usuário
+    printf("Digite a ordem da matriz quadrada: ");
+    scanf("%d", &num);  // Lê o valor de num digitado pelo usuário
+
+    int MATRIZ[num][num];  // Declara uma matriz quadrada de ordem num
+
+    // Solicita que o usuário digite os elementos da matriz
+    printf("\nDigite os elementos da matriz (%dx%d):\n", num, num);
+    for (int i = 0; i < num; i++)           // Percorre as linhas
+    {
+        for (int j = 0; j < num; j++)       // Percorre as colunas
+        {
+            printf("matriz[%d][%d] = ", i, j);
+            scanf("%d", &MATRIZ[i][j]);   // Lê o elemento digitado
+        }
+    }
+
+    // Chama a função que verifica se a matriz é identidade
+    int resultado = ehIdentidade(num, MATRIZ);
+
+    // Exibe o resultado
+    if (resultado == 1)
+    {
+        printf("\nA matriz eh identidade!\n");  // Mensagem para o caso verdadeiro
+    }
+    else
+    {
+        printf("\nA matriz NAO eh identidade.\n");  // Mensagem para o caso falso
+    }
+
+    system("pause");
+    return 0;  // Finaliza o programa com sucesso
+}
