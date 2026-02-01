@@ -1,0 +1,59 @@
+/*
+55. Faça uma função que recebe, por parâmetro, uma matriz A[3][3]
+    e retorna a soma dos elementos da sua diagonal principal e da sua diagonal secundária.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma das diagonais principal e secundária de uma matriz 3x3
+// -----------------------------------------------------------------------------
+int somaDiagonais(int X[3][3])
+{
+    int soma = 0;  // Variável que acumulará a soma dos elementos
+
+    // Percorre todas as linhas (0 a 2)
+    for (int i = 0; i < 3; i++)
+    {
+        // Soma o elemento da diagonal principal (A[i][i])
+        soma += X[i][i];
+
+        // Soma o elemento da diagonal secundária (A[i][2 - i])
+        soma += X[i][2 - i];
+    }
+
+    // Se a matriz tiver ordem ímpar (3x3), o elemento central foi somado duas vezes.
+    // Por isso, subtrai uma vez o valor central (A[1][1]).
+    soma -= X[1][1];
+
+    return soma;  // Retorna o valor total da soma
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int A[3][3];  // Declara a matriz 3x3
+
+    // Entrada dos elementos da matriz
+    printf("Digite os elementos da matriz 3x3:\n");
+    for (int i = 0; i < 3; i++)            // Percorre as linhas
+    {
+        for (int j = 0; j < 3; j++)        // Percorre as colunas
+        {
+            printf("A[%d][%d] = ", i, j);
+            scanf("%d", &A[i][j]);         // Lê o valor e armazena na matriz
+        }
+    }
+
+    // Chama a função que calcula a soma das diagonais
+    int resultado = somaDiagonais(A);
+
+    // Exibe o resultado final
+    printf("\nA soma dos elementos das diagonais principal e secundaria eh: %d\n", resultado);
+
+    system("pause");
+    return 0;  // Finaliza o programa com sucesso
+}
