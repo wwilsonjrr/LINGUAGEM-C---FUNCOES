@@ -1,0 +1,62 @@
+/*
+49. Faça uma função que receba uma matriz de 3 x 3 elementos.
+    Calcule e retorne a soma dos elementos que estão abaixo da diagonal principal.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma dos elementos abaixo da diagonal principal
+// -----------------------------------------------------------------------------
+int somaAbaixoDiagonal(int matriz[3][3])
+{
+    int soma = 0;                            // Variável que armazenará a soma dos elementos
+
+    // Percorre todas as linhas da matriz
+    for (int i = 0; i < 3; i++)
+    {
+        // Percorre todas as colunas da matriz
+        for (int j = 0; j < 3; j++)
+        {
+            // Verifica se o elemento está abaixo da diagonal principal (linha > coluna)
+            if (i > j)
+            {
+                soma += matriz[i][j];        // Adiciona o valor do elemento à variável soma
+            }
+        }
+    }
+
+    return soma;                             // Retorna a soma final
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main) — ponto de entrada do programa
+// -----------------------------------------------------------------------------
+int main()
+{
+    int MATRIZ[3][3];                        // Declara uma matriz 3x3 de inteiros
+    int i, j;                                // Variáveis para índices de linha e coluna
+
+    // Solicita que o usuário digite os valores da matriz
+    printf("Digite os elementos da matriz 3x3:\n");
+
+    // Laço duplo para preencher a matriz com os valores digitados
+    for (i = 0; i < 3; i++)                  // Percorre as linhas
+    {
+        for (j = 0; j < 3; j++)              // Percorre as colunas
+        {
+            printf("matriz[%d][%d] = ", i, j); // Exibe a posição atual da matriz
+            scanf("%d", &MATRIZ[i][j]);        // Lê e armazena o valor digitado
+        }
+    }
+
+    // Chama a função que calcula a soma abaixo da diagonal
+    int resultado = somaAbaixoDiagonal(MATRIZ);
+
+    // Exibe o resultado final
+    printf("\nA soma dos elementos abaixo da diagonal principal eh: %d\n", resultado);
+
+    system("pause");
+    return 0;                                // Indica que o programa terminou corretamente
+}
