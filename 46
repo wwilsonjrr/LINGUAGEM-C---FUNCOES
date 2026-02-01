@@ -1,0 +1,99 @@
+/*
+46. Crie um programa contendo as seguintes funções que recebem um vetor V de números reais como parâmetro:
+    • Impressão normal do vetor.
+    • Impressão inversa do vetor.
+    • Função que retorna a média aritmética dos elementos do vetor.
+*/
+
+#include <stdio.h>  // Biblioteca padrão de entrada e saída (printf, scanf)
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que imprime o vetor na ordem normal (do primeiro até o último elemento)
+// -----------------------------------------------------------------------------
+void imprimeNormal(float v[], int n)
+{
+    printf("\nVetor na ordem normal:\n");     // Imprime o cabeçalho explicativo
+
+    // Estrutura de repetição 'for' para percorrer o vetor do primeiro até o último índice
+    for (int i = 0; i < n; i++)
+    {
+        // Exibe o índice e o valor correspondente do vetor com 2 casas decimais
+        printf("v[%d] = %.2f\n", i, v[i]);
+    }
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função que imprime o vetor na ordem inversa (do último até o primeiro elemento)
+// -----------------------------------------------------------------------------
+void imprimeInverso(float v[], int n)
+{
+    printf("\nVetor na ordem inversa:\n");     // Imprime o cabeçalho explicativo
+
+    // Estrutura de repetição 'for' que percorre o vetor de trás para frente
+    for (int i = n - 1; i >= 0; i--)
+    {
+        // Exibe o índice e o valor correspondente do vetor com 2 casas decimais
+        printf("v[%d] = %.2f\n", i, v[i]);
+    }
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função que calcula e retorna a média aritmética dos elementos do vetor
+// -----------------------------------------------------------------------------
+float calculaMedia(float v[], int n)
+{
+    float soma = 0;                            // Variável que acumulará a soma de todos os elementos
+
+    // Estrutura 'for' para percorrer o vetor e somar todos os elementos
+    for (int i = 0; i < n; i++)
+    {
+        soma += v[i];                          // Adiciona o valor atual à soma total
+    }
+
+    float media = soma / n;                    // Divide a soma pelo número total de elementos (fórmula da média)
+    return media;                              // Retorna o valor da média aritmética calculada
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main) — ponto de entrada do programa
+// -----------------------------------------------------------------------------
+int main()
+{
+    int n;                                     // Variável para armazenar a quantidade de elementos do vetor
+
+    // Solicita ao usuário que informe quantos elementos o vetor terá
+    printf("Digite o numero de elementos do vetor: ");
+    scanf("%d", &n);                           // Lê o valor digitado e armazena em 'n'
+
+    float v[n];                                // Declara o vetor 'v' com 'n' posições do tipo float (números reais)
+
+    // Solicita que o usuário insira os valores para preencher o vetor
+    printf("\nDigite os %d valores do vetor:\n", n);
+
+    // Estrutura de repetição para ler os valores informados pelo usuário
+    for (int i = 0; i < n; i++)
+    {
+        printf("v[%d] = ", i);                 // Exibe o índice atual do vetor
+        scanf("%f", &v[i]);                    // Lê o valor digitado e armazena na posição v[i]
+    }
+
+    // Chama a função que imprime o vetor na ordem normal
+    imprimeNormal(v, n);
+
+    // Chama a função que imprime o vetor na ordem inversa
+    imprimeInverso(v, n);
+
+    // Chama a função que calcula a média e guarda o resultado na variável 'media'
+    float media = calculaMedia(v, n);
+
+    // Exibe o resultado da média aritmética com duas casas decimais
+    printf("\nMedia aritmetica dos elementos = %.2f\n", media);
+
+    system("pause");
+    return 0;                                  // Retorna 0 para indicar que o programa terminou sem erros
+}
