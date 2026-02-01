@@ -1,0 +1,81 @@
+/*
+52. Escreva uma função que receba uma matriz quadrada de ordem N
+    e calcule a sua transposta (se B é a matriz transposta de A, então b[j][i] = a[i][j]).
+*/
+
+#include <stdio.h>  // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a matriz transposta
+// -----------------------------------------------------------------------------
+void calculaTransposta(int N, int A[N][N], int B[N][N])
+{
+    // Percorre as linhas da matriz A
+    for (int i = 0; i < N; i++)
+    {
+        // Percorre as colunas da matriz A
+        for (int j = 0; j < N; j++)
+        {
+            // Troca os índices de linha e coluna para gerar a transposta
+            B[j][i] = A[i][j];
+        }
+    }
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função que exibe uma matriz NxN na tela
+// -----------------------------------------------------------------------------
+void exibeMatriz(int N, int M[N][N])
+{
+    for (int i = 0; i < N; i++)          // Percorre as linhas
+    {
+        for (int j = 0; j < N; j++)      // Percorre as colunas
+        {
+            printf("%4d ", M[i][j]);     // Exibe cada elemento com espaçamento
+        }
+        printf("\n");                    // Quebra de linha ao final de cada linha da matriz
+    }
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int n;                               // Ordem da matriz (ex: 2x2, 3x3, 4x4)
+    printf("Digite a ordem da matriz quadrada: ");
+    scanf("%d", &n);                     // Lê a ordem da matriz informada pelo usuário
+
+    int a[n][n];                         // Declara a matriz original a
+    int b[n][n];                         // Declara a matriz transposta b
+
+    // Entrada dos elementos da matriz a
+    printf("\nDigite os elementos da matriz a:\n");
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            printf("A[%d][%d] = ", i, j);
+            scanf("%d", &a[i][j]);        // Armazena o valor digitado pelo usuário
+        }
+    }
+
+    // Calcula a transposta chamando a função
+    calculaTransposta(n, a, b);
+
+    // Exibe a matriz original a
+    printf("\nMatriz a (original):\n");
+    exibeMatriz(n, a);
+
+    // Exibe a matriz transposta b
+    printf("\nMatriz b (transposta de a):\n");
+    exibeMatriz(n, b);
+
+    system("pause");
+    return 0;                            // Encerra o programa com sucesso
+}
