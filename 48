@@ -1,0 +1,62 @@
+/*
+48. Faça uma função que receba uma matriz de 3 x 3 elementos.
+    Calcule a soma dos elementos que estão acima da diagonal principal.
+*/
+
+#include <stdio.h>   // Biblioteca padrão para entrada e saída de dados
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma dos elementos acima da diagonal principal
+// -----------------------------------------------------------------------------
+int somaAcimaDiagonal(int matriz[3][3])
+{
+    int soma = 0;                            // Variável que armazenará a soma dos elementos
+
+    // Laço externo percorre as linhas da matriz (0 até 2)
+    for (int i = 0; i < 3; i++)
+    {
+        // Laço interno percorre as colunas da matriz (0 até 2)
+        for (int j = 0; j < 3; j++)
+        {
+            // Verifica se o elemento está acima da diagonal principal (coluna > linha)
+            if (j > i)
+            {
+                soma += matriz[i][j];        // Adiciona o valor do elemento à variável soma
+            }
+        }
+    }
+
+    return soma;                             // Retorna a soma final dos elementos acima da diagonal
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main) — ponto de entrada do programa
+// -----------------------------------------------------------------------------
+int main()
+{
+    int MATRIZ[3][3];                        // Declara uma matriz 3x3 de números inteiros
+    int i, j;                                // Variáveis auxiliares para os índices da matriz
+
+    // Solicita ao usuário que digite os valores da matriz
+    printf("Digite os elementos da matriz 3x3:\n");
+
+    // Laço duplo para preencher a matriz com os valores digitados
+    for (i = 0; i < 3; i++)                  // Percorre as linhas da matriz
+    {
+        for (j = 0; j < 3; j++)              // Percorre as colunas da matriz
+        {
+            printf("matriz[%d][%d] = ", i, j); // Indica a posição sendo lida
+            scanf("%d", &MATRIZ[i][j]);        // Lê o valor digitado e armazena na matriz
+        }
+    }
+
+    // Chama a função que calcula a soma dos elementos acima da diagonal
+    int resultado = somaAcimaDiagonal(MATRIZ);
+
+    // Exibe o resultado final
+    printf("\nA soma dos elementos acima da diagonal principal eh: %d\n", resultado);
+
+    system("pause");
+    return 0;                                // Indica que o programa terminou corretamente
+}
