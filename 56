@@ -1,0 +1,65 @@
+/*
+56. Faça uma função que recebe, por parâmetro, uma matriz A[7][6] e uma linha N,
+    e retorna a soma dos elementos dessa linha.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma dos elementos de uma linha específica da matriz
+// -----------------------------------------------------------------------------
+int somaLinha(int A[7][6], int N)
+{
+    int soma = 0;  // Variável acumuladora
+
+    // Percorre todas as colunas da linha N
+    for (int j = 0; j < 6; j++)
+    {
+        soma += A[N][j];  // Adiciona o elemento da coluna j à soma
+    }
+
+    return soma;  // Retorna a soma total da linha N
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int X[7][6];   // Declara uma matriz com 7 linhas e 6 colunas
+    int num;         // Variável que guardará o número da linha desejada
+
+    // Solicita que o usuário digite os elementos da matriz
+    printf("Digite os elementos da matriz 7x6:\n");
+
+    // Preenche a matriz com valores informados pelo usuário
+    for (int i = 0; i < 7; i++)          // Percorre as linhas
+    {
+        for (int j = 0; j < 6; j++)      // Percorre as colunas
+        {
+            printf("A[%d][%d] = ", i, j);
+            scanf("%d", &X[i][j]);       // Lê o elemento e armazena na matriz
+        }
+    }
+
+    // Solicita o número da linha cuja soma será calculada
+    printf("\nDigite o numero da linha que deseja somar (0 a 6): ");
+    scanf("%d", &num);
+
+    // Verifica se o número da linha é válido
+    if (num < 0 || num >= 7)
+    {
+        printf("Linha invalida! Deve estar entre 0 e 6.\n");
+        return 1;  // Não tem nada a ver com “verdadeiro ou falso” aqui, Ele serve para encerrar o programa com código de erro.
+    }
+
+    // Chama a função para calcular a soma da linha num
+    int resultado = somaLinha(X, num);
+
+    // Exibe o resultado da soma
+    printf("\nA soma dos elementos da linha %d eh: %d\n", num, resultado);
+
+    system("pause");
+    return 0;  // Finaliza o programa
+}
