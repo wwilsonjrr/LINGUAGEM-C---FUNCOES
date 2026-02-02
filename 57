@@ -1,0 +1,65 @@
+/*
+57. Faça uma função que recebe, por parâmetro, uma matriz A[7][6] e uma coluna N,
+    e retorna a soma dos elementos dessa coluna.
+*/
+
+#include <stdio.h>   // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula a soma dos elementos de uma coluna específica da matriz
+// -----------------------------------------------------------------------------
+int somaColuna(int A[7][6], int N)
+{
+    int soma = 0;  // Variável acumuladora que guardará a soma dos elementos
+
+    // Percorre todas as linhas (de 0 até 6)
+    for (int i = 0; i < 7; i++)
+    {
+        soma += A[i][N];  // Soma o elemento da linha i e coluna N
+    }
+
+    return soma;  // Retorna o total da soma calculada
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int X[7][6];  // Declara a matriz com 7 linhas e 6 colunas
+    int num;        // Variável que armazenará o número da coluna desejada
+
+    // Solicita os valores da matriz ao usuário
+    printf("Digite os elementos da matriz 7x6:\n");
+
+    // Preenche a matriz
+    for (int i = 0; i < 7; i++)          // Percorre as linhas
+    {
+        for (int j = 0; j < 6; j++)      // Percorre as colunas
+        {
+            printf("A[%d][%d] = ", i, j);
+            scanf("%d", &X[i][j]);       // Lê o elemento e armazena na matriz
+        }
+    }
+
+    // Solicita o número da coluna que o usuário deseja somar
+    printf("\nDigite o numero da coluna que deseja somar (0 a 5): ");
+    scanf("%d", &num);
+
+    // Verifica se a coluna informada é válida
+    if (num < 0 || num >= 6)
+    {
+        printf("Coluna invalida! Deve estar entre 0 e 5.\n");
+        return 1;  // Encerra o programa em caso de erro
+    }
+
+    // Chama a função que calcula a soma da coluna num
+    int resultado = somaColuna(X, num);
+
+    // Exibe o resultado
+    printf("\nA soma dos elementos da coluna %d eh: %d\n", num, resultado);
+
+    system("pause");
+    return 0;  // Finaliza o programa corretamente
+}
