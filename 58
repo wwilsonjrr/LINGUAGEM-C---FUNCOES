@@ -1,0 +1,103 @@
+/*
+58. Faça uma função que receba, por parâmetro, duas matrizes quadradas de ordem N, A e B,
+    e retorne uma matriz C, também por parâmetro, que seja o produto matricial de A e B.
+
+    Fórmula do produto matricial:
+    C[i][j] = somatório (de k = 0 até N-1) de (A[i][k] * B[k][j])
+
+
+
+    Observações:
+
+    printf("%5d ", 3);
+
+    (4 espaços + 3)
+
+
+    printf("%5d ", 123);
+
+    (2 espaços + 123)
+
+
+    C[i][j] += A[i][k] * B[k][j];  < --- para multiplicação de duas matrizes
+*/
+
+#include <stdio.h>  // Biblioteca padrão de entrada e saída
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que calcula o produto de duas matrizes quadradas de ordem N
+// -----------------------------------------------------------------------------
+void multiplicaMatrizes(int N, int A[10][10], int B[10][10], int C[10][10])
+{
+    // Percorre cada linha da matriz A
+    for (int i = 0; i < N; i++)
+    {
+        // Percorre cada coluna da matriz B
+        for (int j = 0; j < N; j++)
+        {
+            C[i][j] = 0;  // Inicializa o elemento C[i][j] com zero
+
+            // Percorre os elementos da linha i de A e da coluna j de B
+            for (int k = 0; k < N; k++)
+            {
+                // Acumula o produto de A[i][k] e B[k][j]
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{
+    int num;                 // Ordem da matriz (exemplo: num = 3)
+    int X[10][10], Y[10][10], Z[10][10];  // Matrizes X, Y e Z (máx 10x10)
+
+    // Lê a ordem das matrizes
+    printf("Digite a ordem da matriz (maximo 10): ");
+    scanf("%d", &num);
+
+    // Lê os elementos da matriz A
+    printf("\nDigite os elementos da matriz A:\n");
+    for (int i = 0; i < num; i++)          // Percorre as linhas
+    {
+        for (int j = 0; j < num; j++)      // Percorre as colunas
+        {
+            printf("A[%d][%d] = ", i, j);
+            scanf("%d", &X[i][j]);       // Lê cada elemento
+        }
+    }
+
+    // Lê os elementos da matriz B
+    printf("\nDigite os elementos da matriz B:\n");
+    for (int i = 0; i < num; i++)
+    {
+        for (int j = 0; j < num; j++)
+        {
+            printf("B[%d][%d] = ", i, j);
+            scanf("%d", &Y[i][j]);
+        }
+    }
+
+    // Chama a função que realiza o produto matricial
+    multiplicaMatrizes(num, X, Y, Z);
+
+    // Exibe a matriz resultante C
+    printf("\nMatriz resultante C = A x B:\n");
+    for (int i = 0; i < num; i++)
+    {
+        for (int j = 0; j < num; j++)
+        {
+            printf("%5d ", Z[i][j]);  // Exibe cada elemento de C formatado
+        }
+        printf("\n");  // Quebra de linha após cada linha da matriz
+    }
+
+    system("pause");
+    return 0;  // Finaliza o programa
+}
