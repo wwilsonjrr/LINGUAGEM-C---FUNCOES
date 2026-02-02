@@ -1,0 +1,110 @@
+/*
+59. Faça uma função que recebe, por parâmetro, dois vetores de 10 elementos inteiros
+    e que calcule e retorne, também por parâmetro, o vetor união dos dois primeiros.
+
+
+    Como o C “pensa” isso
+
+    Em C não existe conjunto, só:
+
+    vetores
+
+    índices
+
+    laços
+
+    comparações
+
+    Então a lógica vira:
+
+    1️ - Copie tudo de A
+    2️ - Para cada elemento de B:
+       • verifique se ele já está em A
+       • se não estiver, adicione
+*/
+
+#include <stdio.h>   // Inclui a biblioteca padrão de entrada e saída
+#include <stdlib.h>
+#include <stdbool.h> // Inclui a biblioteca para usar o tipo bool (true / false)
+
+// -----------------------------------------------------------------------------
+// Função que calcula a união de dois vetores A e B, ambos com 10 elementos
+// -----------------------------------------------------------------------------
+void uniaoVetores(int A[10], int B[10], int C[20], int *tamC) // Declara a função que recebe A, B e devolve C e seu tamanho
+{ // Início da função
+    int i, j;          // Declara variáveis inteiras para índices dos vetores
+    int k = 0;         // Índice do vetor C, começa em 0
+
+    // Copia todos os elementos de A para o vetor C
+    for (i = 0; i < 10; i++) // Laço que percorre as 10 posições do vetor A
+    { // Início do laço que copia A para C
+        C[k] = A[i];   // Copia o elemento A[i] para C[k]
+        k++;           // Incrementa o índice de C para a próxima posição
+    } // Fim do laço de cópia
+
+    // Agora, verifica cada elemento do vetor B para não repetir valores
+    for (i = 0; i < 10; i++) // Percorre os 10 elementos de B
+    { // Início do laço que analisa cada elemento de B
+        bool existe = false; // Inicializa a variável booleana para indicar se o número já existe em C
+
+        // Percorre o vetor C para ver se o elemento de B já está presente
+        for (j = 0; j < k; j++) // Percorre os elementos atuais de C
+        { // Início do laço interno
+            if (B[i] == C[j])   // Verifica se o valor de B[i] é igual a algum elemento de C
+            { // Início do bloco condicional
+                existe = true;  // Se for igual, marca que o elemento já existe
+                break;          // Sai do laço interno pois não precisa procurar mais
+            } // Fim do bloco condicional
+        } // Fim do laço interno
+
+        // Se o elemento não existe, ele deve ser adicionado ao vetor C
+        if (!existe)  // Verifica se o elemento NÃO existe (existe == false)
+        { // Início do bloco condicional
+            C[k] = B[i];  // Copia o valor de B[i] para o final do vetor C
+            k++;          // Incrementa o índice k, pois adicionou um novo valor
+        } // Fim do bloco condicional
+    } // Fim do laço que percorre B
+
+    *tamC = k; // Armazena o tamanho final da união no endereço apontado por tamC
+} // Fim da função uniaoVetores
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main() // Início da função principal
+{ // Abre o bloco principal
+    int vA[10], vB[10], vC[20]; // Declara os vetores A e B com 10 elementos e C com até 20
+    int tamanhoUniao;            // Variável que armazenará o tamanho final da união
+
+    // Solicita os elementos do vetor A
+    printf("Digite 10 elementos do vetor A:\n"); // Mensagem de orientação ao usuário
+    for (int i = 0; i < 10; i++) // Laço para ler os 10 elementos de A
+    { // Início do laço
+        printf("A[%d] = ", i); // Mostra o índice atual de A
+        scanf("%d", &vA[i]);    // Lê um número inteiro e armazena em vA[i]
+    } // Fim do laço de leitura de A
+
+    // Solicita os elementos do vetor B
+    printf("\nDigite 10 elementos do vetor B:\n"); // Mensagem para entrada do vetor B
+    for (int i = 0; i < 10; i++) // Laço para ler os 10 elementos de B
+    { // Início do laço
+        printf("B[%d] = ", i); // Mostra o índice atual de B
+        scanf("%d", &vB[i]);    // Lê um número inteiro e armazena em B[i]
+    } // Fim do laço de leitura de B
+
+    // Chama a função que calcula a união dos vetores A e B
+    uniaoVetores(vA, vB, vC, &tamanhoUniao); // Passa os vetores e o endereço de tamanhoC
+
+    // Exibe o vetor união
+    printf("\nVetor uniao (A ∪ B):\n"); // Exibe o título da união
+    for (int i = 0; i < tamanhoUniao; i++) // Laço para exibir todos os elementos de C
+    { // Início do laço de impressão
+        printf("%d ", vC[i]); // Imprime o elemento C[i] seguido de um espaço
+    } // Fim do laço de impressão
+
+    // Exibe o tamanho total da união
+    printf("\nTamanho da uniao: %d elementos\n", tamanhoUniao); // Mostra quantos elementos foram encontrados
+
+    system("pause");
+    return 0; // Encerra o programa com sucesso
+} // Fim da função principal
