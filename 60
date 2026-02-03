@@ -20,7 +20,7 @@ int encontraSubstring(char str[], char sub[])
     { // Início do laço principal
         for (j = 0; j < tamanhoSub; j++) // Percorre cada caractere da sub-string
         { // Início do laço interno
-            if (str[i + j] != sub[j]) // Compara caractere a caractere
+            if (str[i + j] != sub[j]) // Compara caractere da string principal com o caractere da sub-string
             { // Se os caracteres forem diferentes
                 break; // Sai do laço interno (não há correspondência aqui)
             } // Fim do if
