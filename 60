@@ -1,0 +1,73 @@
+/*
+60. Escreva uma função que retorne a primeira posição de uma sub-string dentro de uma string.
+    Caso a sub-string não seja encontrada, a função deve retornar -1.
+*/
+
+#include <stdio.h>   // Inclui biblioteca padrão de entrada e saída (printf, scanf)
+#include <string.h>  // Inclui biblioteca para manipulação de strings (strlen, etc.)
+
+// -----------------------------------------------------------------------------
+// Função que retorna a posição inicial de uma sub-string dentro de outra string
+// -----------------------------------------------------------------------------
+int encontraSubstring(char str[], char sub[])
+{ // Início da função
+    int i, j;                        // Variáveis para percorrer as strings
+    int tamanhoStr = strlen(str);    // Calcula o tamanho da string principal
+    int tamanhoSub = strlen(sub);    // Calcula o tamanho da sub-string
+
+    // Percorre a string principal até o ponto onde ainda é possível caber a sub-string
+    for (i = 0; i <= tamanhoStr - tamanhoSub; i++)
+    { // Início do laço principal
+        for (j = 0; j < tamanhoSub; j++) // Percorre cada caractere da sub-string
+        { // Início do laço interno
+            if (str[i + j] != sub[j]) // Compara caractere a caractere
+            { // Se os caracteres forem diferentes
+                break; // Sai do laço interno (não há correspondência aqui)
+            } // Fim do if
+        } // Fim do laço interno
+
+        // Se j chegou até o fim da sub-string, é porque houve uma correspondência completa
+        if (j == tamanhoSub)
+        { // Início do bloco condicional
+            return i; // Retorna a posição inicial onde a sub-string foi encontrada
+        } // Fim do bloco condicional
+    } // Fim do laço principal
+
+    return -1; // Retorna -1 se a sub-string não foi encontrada
+} // Fim da função encontraSubstring
+
+// -----------------------------------------------------------------------------
+// Função principal (main)
+// -----------------------------------------------------------------------------
+int main()
+{ // Início da função principal
+    char texto[100];   // Declara a string principal (máximo 99 caracteres + '\0')
+    char busca[50];    // Declara a sub-string a ser procurada (máximo 49 caracteres + '\0')
+    int posicao;       // Variável para armazenar a posição retornada pela função
+
+    // Solicita ao usuário a string principal
+    printf("Digite a string principal: ");
+    fgets(texto, sizeof(texto), stdin); // Lê a string com espaços
+    texto[strcspn(texto, "\n")] = '\0'; // Remove o caractere '\n' (enter) do final
+
+    // Solicita a sub-string que será buscada
+    printf("Digite a sub-string a ser procurada: ");
+    fgets(busca, sizeof(busca), stdin); // Lê a sub-string
+    busca[strcspn(busca, "\n")] = '\0'; // Remove o '\n' do final
+
+    // Chama a função para encontrar a posição
+    posicao = encontraSubstring(texto, busca);
+
+    // Verifica o retorno da função
+    if (posicao != -1) // Se encontrou a sub-string
+    { // Início do bloco condicional
+        printf("A sub-string foi encontrada na posicao %d.\n", posicao); // Exibe a posição
+    } // Fim do bloco condicional
+    else // Caso contrário
+    { // Início do bloco else
+        printf("A sub-string nao foi encontrada.\n"); // Mensagem de não encontrado
+    } // Fim do bloco else
+
+    system("pause");
+    return 0; // Finaliza o programa com sucesso
+} // Fim da função main
