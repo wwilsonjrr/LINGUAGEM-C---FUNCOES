@@ -1,0 +1,51 @@
+/*
+64. Implemente a função a qual recebe duas strings, str1 e str2,
+    e concatena str2 ao final de str1.
+*/
+
+#include <stdio.h>   // printf, fgets
+#include <stdlib.h>
+#include <string.h>  // strcat, strcspn
+
+// -----------------------------------------------------------------------------
+// Função que concatena duas strings usando strcat()
+// -----------------------------------------------------------------------------
+void concatenaStrings(char str1[], char str2[])
+{
+    /*
+        strcat(str1, str2):
+        - adiciona str2 ao final de str1
+        - str1 deve ter espaço suficiente
+    */
+    strcat(str1, str2);
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char str1[200]; // Primeira string (com espaço para concatenar)
+    char str2[100]; // Segunda string
+
+    // Leitura da primeira string
+    printf("Digite a primeira string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = '\0';
+
+    // Leitura da segunda string
+    printf("Digite a segunda string: ");
+    fgets(str2, sizeof(str2), stdin);
+    str2[strcspn(str2, "\n")] = '\0';
+
+    // Concatena str2 ao final de str1
+    concatenaStrings(str1, str2);
+
+    // Exibe o resultado
+    printf("\nString resultante da concatenacao: \"%s\"\n", str1);
+
+    system("pause");
+    return 0;
+}
