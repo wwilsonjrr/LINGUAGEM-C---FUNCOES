@@ -1,0 +1,59 @@
+/*
+65. Implemente a função a qual recebe duas strings, str1 e str2,
+    e um valor inteiro positivo N. A função concatena não mais que
+    N caracteres de str2 ao final de str1.
+*/
+
+#include <stdio.h>   // printf, fgets, scanf
+#include <stdlib.h>
+#include <string.h>  // strncat, strcspn
+
+// -----------------------------------------------------------------------------
+// Função que concatena no máximo N caracteres de str2 ao final de str1
+// -----------------------------------------------------------------------------
+void concatenaLimitado(char str1[], char str2[], int N)
+{
+    /*
+        strncat(str1, str2, N):
+        - concatena até N caracteres de str2 em str1
+        - garante o caractere '\0' no final
+        - str1 deve ter espaço suficiente
+    */
+    strncat(str1, str2, N);
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char str1[200]; // Primeira string (com espaço extra)
+    char str2[100]; // Segunda string
+    int N;          // Limite de caracteres a concatenar
+
+    // Leitura da primeira string
+    printf("Digite a primeira string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = '\0';
+
+    // Leitura da segunda string
+    printf("Digite a segunda string: ");
+    fgets(str2, sizeof(str2), stdin);
+    str2[strcspn(str2, "\n")] = '\0';
+
+    // Leitura do valor de N
+    printf("Digite o numero maximo de caracteres a concatenar (N): ");
+    scanf("%d", &N);
+
+    // Concatena até N caracteres de str2 em str1
+    concatenaLimitado(str1, str2, N);
+
+    // Exibe o resultado
+    printf("\nString resultante da concatenacao (limitada a %d caracteres): \"%s\"\n",
+           N, str1);
+
+    system("pause");
+    return 0;
+}
