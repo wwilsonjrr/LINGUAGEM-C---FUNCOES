@@ -1,0 +1,52 @@
+/*
+67. Faça uma rotina que receba como parâmetro um vetor de caracteres e seu tamanho.
+    A função deverá ler uma string do teclado, caractere por caractere usando getchar(),
+    até que o usuário pressione Enter ou o tamanho máximo seja atingido.
+*/
+
+#include <stdio.h>  // printf, getchar
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Função que lê uma string caractere por caractere usando getchar()
+// -----------------------------------------------------------------------------
+void lerString(char vetor[], int tamanho)
+{
+    int i = 0;   // Índice do vetor
+    char c;      // Caractere lido do teclado
+
+    printf("Digite uma string (maximo %d caracteres): ", tamanho - 1);
+
+    // Lê os caracteres um a um
+    while (i < tamanho - 1)
+    {
+        c = getchar();      // Lê um caractere
+
+        if (c == '\n')      // Se for Enter, encerra a leitura
+            break;
+
+        vetor[i] = c;       // Armazena o caractere no vetor
+        i++;                // Avança para a próxima posição
+    }
+
+    vetor[i] = '\0';        // Finaliza a string corretamente
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char texto[50];  // String com tamanho máximo de 49 caracteres + '\0'
+
+    // Chama a função de leitura
+    lerString(texto, 50);
+
+    // Exibe a string lida
+    printf("\nString digitada: %s\n", texto);
+
+    system("pause");
+    return 0;
+}
