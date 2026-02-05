@@ -1,0 +1,43 @@
+/*
+66. Faça uma função que, dado um caractere qualquer,
+    retorne o mesmo caractere sempre em maiúsculo.
+*/
+
+#include <stdio.h>   // printf, scanf
+#include <stdlib.h>
+#include <ctype.h>   // toupper
+
+// -----------------------------------------------------------------------------
+// Função que converte um caractere para maiúsculo usando toupper()
+// -----------------------------------------------------------------------------
+char paraMaiusculo(char c)
+{
+    /*
+        toupper(c):
+        - se c for letra minúscula, retorna a maiúscula
+        - se não for letra, retorna o próprio caractere
+    */
+    return toupper(c);
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char caractere;  // Caractere digitado pelo usuário
+    char resultado;  // Caractere convertido
+
+    // Solicita um caractere ao usuário
+    printf("Digite um caractere qualquer: ");
+    scanf(" %c", &caractere); // Espaço antes do %c evita ler '\n'
+
+    // Converte o caractere para maiúsculo
+    resultado = paraMaiusculo(caractere);
+
+    // Exibe o resultado
+    printf("\nO caractere em maiusculo eh: %c\n", resultado);
+
+    system("pause");
+    return 0;
+}
