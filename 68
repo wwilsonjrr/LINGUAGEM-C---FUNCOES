@@ -1,0 +1,103 @@
+/*
+68. Faça uma função que receba duas strings e retorne a intercalação
+    letra a letra da primeira com a segunda string.
+    A string intercalada deve ser retornada na primeira string.
+
+
+    Exemplo simples
+
+    Suponha:
+
+    primeira string: "abc"
+
+    segunda string: "123"
+
+    Intercalação letra a letra:
+
+    pega a (da primeira)
+
+    pega 1 (da segunda)
+
+    pega b
+
+    pega 2
+
+    pega c
+
+    pega 3
+*/
+
+#include <stdio.h>   // printf, fgets
+#include <stdlib.h>
+#include <string.h>  // strlen, strcspn
+
+// -----------------------------------------------------------------------------
+// Função que intercala letra a letra str1 e str2,
+// armazenando o resultado em str1
+// -----------------------------------------------------------------------------
+void intercalarStrings(char str1[], char str2[])
+{
+    char temp[200];          // Vetor temporário para o resultado
+    int i = 0;               // Índice geral
+    int k = 0;               // Índice de preenchimento de temp
+    int tam1 = strlen(str1); // Tamanho da primeira string
+    int tam2 = strlen(str2); // Tamanho da segunda string
+
+    // Intercala enquanto ainda houver caracteres em alguma das strings
+    while (i < tam1 || i < tam2)
+    {
+        if (i < tam1)           // Se ainda existe caractere em str1
+        {
+            temp[k] = str1[i];  // Copia UMA letra da str1 para a próxima posição livre de temp
+            k++;                // Depois, avança o índice k para a próxima posição
+        }
+
+        if (i < tam2)           // Se ainda existe caractere em str2
+        {
+            temp[k] = str2[i];  // Copia UMA letra da str2 para a próxima posição livre de temp
+            k++;                // Depois, avança o índice k para a próxima posição
+        }
+
+        i++;                    // Avança para a próxima posição das strings str1 e str2
+    }
+
+    temp[k] = '\0';             // Finaliza a string temporária
+
+    // Copia o resultado de volta para str1
+    i = 0;
+    while (temp[i] != '\0')
+    {
+        str1[i] = temp[i];
+        i++;
+    }
+
+    str1[i] = '\0';          // Finaliza str1 corretamente
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char str1[200]; // Primeira string (receberá o resultado)
+    char str2[100]; // Segunda string
+
+    // Leitura da primeira string
+    printf("Digite a primeira string: ");
+    fgets(str1, sizeof(str1), stdin);
+    str1[strcspn(str1, "\n")] = '\0';
+
+    // Leitura da segunda string
+    printf("Digite a segunda string: ");
+    fgets(str2, sizeof(str2), stdin);
+    str2[strcspn(str2, "\n")] = '\0';
+
+    // Intercala as strings
+    intercalarStrings(str1, str2);
+
+    // Exibe o resultado
+    printf("\nString intercalada: %s\n", str1);
+
+    system("pause");
+    return 0;
+}
