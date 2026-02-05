@@ -1,0 +1,40 @@
+/* Função que converte todos os caracteres de uma string para maiúsculo
+*/
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+// -----------------------------------------------------------------------------
+// Função que converte todos os caracteres de uma string para maiúsculo
+// (sem usar ponteiros)
+// -----------------------------------------------------------------------------
+void stringParaMaiusculo(char str[])
+{
+    int i = 0;
+
+    while (str[i] != '\0')
+    {
+        str[i] = toupper(str[i]);
+        i++;
+    }
+}
+
+int main()
+{
+    char texto [50];
+
+    printf("Digite uma string: \n");
+    fgets(texto, sizeof(texto), stdin);
+    texto[strcspn(texto, "\n")]='\0';
+
+    stringParaMaiusculo(texto);
+
+    printf("Resultado: %s\n", texto);
+
+    system("pause");
+    return 0;
+}
