@@ -1,0 +1,65 @@
+/*
+63. Crie uma função que compara duas strings e que retorna se elas
+    são iguais ou diferentes.
+
+
+    strcmp(str1, str2) == 0
+
+    == 0 são iguais
+
+    resultado = 1;
+*/
+
+#include <stdio.h>   // printf, fgets
+#include <stdlib.h>
+#include <string.h>  // strcmp, strcspn
+
+// -----------------------------------------------------------------------------
+// Função que compara duas strings usando strcmp()
+// Retorna 1 se forem iguais e 0 se forem diferentes
+// -----------------------------------------------------------------------------
+int comparaStrings(char str1[], char str2[])
+{
+    /*
+        strcmp(str1, str2):
+        - retorna 0 se as strings forem iguais
+        - retorna valor diferente de 0 se forem diferentes
+    */
+
+    if (strcmp(str1, str2) == 0)
+        return 1;   // Strings iguais
+    else
+        return 0;   // Strings diferentes
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char texto1[100]; // Primeira string
+    char texto2[100]; // Segunda string
+    int resultado;    // Guarda o resultado da comparação
+
+    // Leitura da primeira string
+    printf("Digite a primeira string: ");
+    fgets(texto1, sizeof(texto1), stdin);
+    texto1[strcspn(texto1, "\n")] = '\0';
+
+    // Leitura da segunda string
+    printf("Digite a segunda string: ");
+    fgets(texto2, sizeof(texto2), stdin);
+    texto2[strcspn(texto2, "\n")] = '\0';
+
+    // Chama a função de comparação
+    resultado = comparaStrings(texto1, texto2);
+
+    // Exibe o resultado
+    if (resultado == 1)
+        printf("\nAs strings \"%s\" e \"%s\" sao IGUAIS.\n", texto1, texto2);
+    else
+        printf("\nAs strings \"%s\" e \"%s\" sao DIFERENTES.\n", texto1, texto2);
+
+    system("pause");
+    return 0;
+}
