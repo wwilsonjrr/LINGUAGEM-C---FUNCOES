@@ -1,0 +1,49 @@
+/*
+62. Crie uma função que calcula o comprimento de uma string.
+    Versão didática:
+    - Usa strings (char[])
+    - Usa funções
+    - NÃO usa ponteiros
+    - Usa strlen()
+*/
+
+#include <stdio.h>   // printf, fgets
+#include <string.h>  // strlen, strcspn
+
+// -----------------------------------------------------------------------------
+// Função que retorna o comprimento de uma string usando strlen()
+// -----------------------------------------------------------------------------
+int tamanho(char str[])
+{
+    /*
+        strlen(str):
+        - percorre a string até encontrar '\0'
+        - retorna o número de caracteres
+        - não conta o '\0'
+    */
+    return strlen(str);
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char texto[100];   // Vetor para armazenar a string
+    int comprimento;   // Variável para guardar o tamanho
+
+    // Solicita a entrada do usuário
+    printf("Digite uma string: ");
+    fgets(texto, sizeof(texto), stdin);
+
+    // Remove o '\n' inserido pelo fgets, se existir
+    texto[strcspn(texto, "\n")] = '\0';
+
+    // Chama a função e recebe o tamanho retornado
+    comprimento = tamanho(texto);
+
+    // Exibe o resultado
+    printf("O comprimento da string \"%s\" eh: %d caracteres.\n", texto, comprimento); // \" imprima uma aspa dupla
+
+    return 0;
+}
