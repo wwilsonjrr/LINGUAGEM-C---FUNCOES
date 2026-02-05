@@ -1,0 +1,132 @@
+/*
+61. Escreva uma função que compare e retorne verdadeiro, caso uma string seja anagrama
+    da outra, e falso, caso contrario
+
+
+
+    freq[(unsigned char)s1[i]]++;
+
+
+
+
+    freq[...]
+
+    freq é um vetor de contagem
+
+
+
+
+    (unsigned char)s1[i]
+
+    Isso faz uma conversão de tipo.
+
+    Por quê?
+
+    Um char pode ser negativo em C (depende do compilador)
+
+    O vetor freq só aceita índices 0 a 255
+
+    Converter para unsigned char garante:
+
+    valor sempre entre 0 e 255
+
+
+
+    ++
+
+    incrementa
+
+    Conta mais uma ocorrência do caractere atual da string s1
+
+
+
+
+    freq[(unsigned char)s2[i]]--;
+
+    Ideia central (bem direta)
+
+    Primeiro loop (s1) → conta (+1)
+
+    Segundo loop (s2) → desconta (−1)
+
+    No final:
+
+    tudo zera → é anagrama
+
+    sobrou algo ≠ 0 → não é anagrama
+
+
+
+
+    Usando tolower() da <ctype.h>
+
+    Anagrama ignora maiúsculas e minúsculas
+
+
+
+*/
+
+#include <stdio.h>     // printf, fgets
+#include <stdlib.h>
+#include <string.h>    // strlen, strcspn
+#include <stdbool.h>   // bool, true, false
+#include <ctype.h>
+
+// -----------------------------------------------------------------------------
+// Função que verifica se duas strings são anagramas
+// -----------------------------------------------------------------------------
+bool ehAnagrama(char s1[], char s2[])
+{
+    int freq[256] = {0};   // Vetor de frequência para caracteres ASCII
+    int i;
+
+    // Se os tamanhos forem diferentes, não podem ser anagramas
+    if (strlen(s1) != strlen(s2))
+        return false;
+
+    // Conta a frequência dos caracteres da primeira string
+    for (i = 0; s1[i] != '\0'; i++) // percorre a string s1 enquanto ela for diferente de '\0'
+    {
+        freq[(unsigned char)tolower(s1[i])]++;
+    }
+
+    // Remove a frequência usando a segunda string
+    for (i = 0; s2[i] != '\0'; i++) // percorre a string s2 enquanto ela for diferente de '\0'
+    {
+        freq[(unsigned char)tolower(s2[i])]--;
+    }
+
+    // Verifica se todas as posições ficaram zeradas
+    for (i = 0; i < 256; i++)
+    {
+        if (freq[i] != 0) // Se sobrar ou faltar qualquer letra, não é anagrama.
+            return false;
+    }
+
+    return true; // é anagrama
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main()
+{
+    char palavra1[100];
+    char palavra2[100];
+
+    printf("Digite a primeira palavra: ");
+    fgets(palavra1, 100, stdin);
+    palavra1[strcspn(palavra1, "\n")] = '\0';  // remove '\n'
+
+    printf("Digite a segunda palavra: ");
+    fgets(palavra2, 100, stdin);
+    palavra2[strcspn(palavra2, "\n")] = '\0';  // remove '\n'
+
+    if (ehAnagrama(palavra1, palavra2))
+        printf("As palavras SAO anagramas.\n");
+    else
+        printf("As palavras NAO sao anagramas.\n");
+
+    system("pause");
+    return 0;
+}
