@@ -1,22 +1,6 @@
 /*
-60. Escreva uma função que retorne a primeira posição de uma sub-string dentro de uma string.
-    Caso a sub-string não seja encontrada, a função deve retornar -1.
-
-    pStr  // ponteiro que percorre a string principal
-    str   // ponteiro para o início da string principal
-    Ambos apontam para o MESMO array de caracteres (a string principal)
-
-     0 1 2 3 4 5 6 7 8 9 10
-     p r o g r a m a c a o
-
-     str  → índice 0
-     pStr → índice 3
-
-     pStr - str = 3
-
-     posição correta
-
-
+60. Escreva uma função que retorne a primeira posição de uma sub-string
+    dentro de uma string. Caso não seja encontrada, retorne -1.
 */
 
 #include <stdio.h>
@@ -24,55 +8,54 @@
 #include <string.h>
 
 // -----------------------------------------------------------------------------
-// Função que retorna a primeira posição de uma sub-string dentro de outra string
-// (implementada com ponteiros)
+// Função que retorna a posição inicial da sub-string dentro da string principal
+// Usa apenas strings (vetores de char) e índices
 // -----------------------------------------------------------------------------
-int encontraSubstring(char *str, char *sub) // *str e *sub são caracteres
+int encontraSubstring(char str[], char sub[])
 {
-    char *pStr;     // Ponteiro para percorrer a string principal
-    char *pSub;     // Ponteiro para percorrer a sub-string
-    char *inicio;   // Marca o início da possível correspondência
+    int i, j;                          // Índices para percorrer as strings
+    int tamStr = strlen(str);          // Tamanho da string principal
+    int tamSub = strlen(sub);          // Tamanho da sub-string
 
     // Percorre a string principal
-    for (pStr = str; *pStr != '\0'; pStr++) // Percorra a string str enquanto o caractere apontado por pStr não for '\0'
+    for (i = 0; i <= tamStr - tamSub; i++)
     {
-        inicio = pStr;   // A partir daqui, vou tentar comparar a sub-string
-        pSub = sub;      // Comece a comparação pelo primeiro caractere da sub-string
-
-        // Compara caractere a caractere
-        while (*inicio == *pSub && *pSub != '\0')   // Enquanto o caractere atual da string principal for igual ao caractere atual da sub-string,
-                                                    // e enquanto a sub-string ainda não terminou
+        // Para cada posição i, tenta comparar a sub-string
+        for (j = 0; j < tamSub; j++)
         {
-            inicio++; // Avance para o próximo caractere da string principal
-            pSub++;   // Avance para o próximo caractere da sub-string
+            // Se algum caractere for diferente, para a comparação
+            if (str[i + j] != sub[j]) // i + j anda na string principal, enquanto j anda na sub-string
+            {
+                break;
+            }
         }
 
-        // Se chegou ao fim da sub-string, encontrou
-        if (*pSub == '\0')
+        // Se j chegou ao tamanho da sub-string, encontrou
+        if (j == tamSub)
         {
-            return pStr - str; // Retorna a posição (diferença de ponteiros)
+            return i;   // Retorna a posição inicial da sub-string
         }
     }
 
-    return -1; // Não encontrou
+    return -1;  // Sub-string não encontrada
 }
 
 // -----------------------------------------------------------------------------
-// Função principal (main)
+// Função principal
 // -----------------------------------------------------------------------------
 int main()
 {
-    char texto[100];
-    char busca[50];
+    char texto[100];     // String principal
+    char busca[50];      // Sub-string a ser procurada
     int posicao;
 
     printf("Digite a string principal: ");
     fgets(texto, sizeof(texto), stdin);
-    texto[strcspn(texto, "\n")] = '\0';
+    texto[strcspn(texto, "\n")] = '\0';   // Remove o '\n'
 
     printf("Digite a sub-string a ser procurada: ");
     fgets(busca, sizeof(busca), stdin);
-    busca[strcspn(busca, "\n")] = '\0';
+    busca[strcspn(busca, "\n")] = '\0';   // Remove o '\n'
 
     posicao = encontraSubstring(texto, busca);
 
