@@ -1,0 +1,199 @@
+/*
+===============================================================================
+EXERCÍCIO 70  (SEM RECURSÃO e SEM PROTÓTIPOS)
+
+Um racional é qualquer número da forma p/q, sendo p inteiro e q inteiro não nulo.
+Convenções:
+- o campo q de todo racional é estritamente positivo; e
+- o MDC(p, q) = 1 (fração sempre simplificada).
+
+Funções:
+(a) reduz(a,b) -> racional que representa a/b
+(b) neg(x)     -> -x
+(c) soma(x,y)  -> x + y
+(d) mult(x,y)  -> x * y
+(e) divi(x,y)  -> x / y
+===============================================================================
+*/
+
+#include <stdio.h>   // printf, scanf
+#include <stdlib.h>  // abs, system("pause")
+
+// -----------------------------------------------------------------------------
+// Estrutura que representa um número racional (fração p/q)
+// -----------------------------------------------------------------------------
+struct racional
+{
+    int p; // numerador
+    int q; // denominador (sempre positivo)
+};
+
+// -----------------------------------------------------------------------------
+// MDC ITERATIVO (sem recursão) - Algoritmo de Euclides
+// -----------------------------------------------------------------------------
+int mdc(int a, int b)
+{
+    a = abs(a); // garante positivo
+    b = abs(b); // garante positivo
+
+    // enquanto b não for zero, continua o algoritmo
+    while (b != 0)
+    {
+        int resto = a % b; // resto da divisão
+        a = b;             // a recebe b
+        b = resto;         // b recebe o resto
+    }
+
+    // Se ambos forem zero, retorna 1 para evitar divisão por zero
+    if (a == 0 && b == 0)
+        return 1; // Porque 1 é o único número que NÃO altera nada quando divide.
+
+    return a; // aqui está o MDC
+}
+
+// -----------------------------------------------------------------------------
+// (a) reduz(a, b): devolve o racional que representa a/b, com q>0 e MDC=1
+// -----------------------------------------------------------------------------
+struct racional reduz(int a, int b)
+{
+    struct racional r; // r é o resultado
+
+    // denominador não pode ser zero
+    if (b == 0)
+    {
+        printf("Erro: denominador nao pode ser zero!\n");
+        // 0/1 é o padrão universal para representar zero como fração.
+        r.p = 0; // É o valor mais seguro para representar um erro sem quebrar o programa
+        r.q = 1; // 1 é o elemento neutro da divisão
+        return r;
+    }
+
+    int divisor = mdc(a, b); // calcula o MDC
+
+    r.p = a / divisor;       // simplifica numerador
+    r.q = b / divisor;       // simplifica denominador
+
+    // garante denominador positivo
+    if (r.q < 0)
+    {
+        r.p = -r.p;
+        r.q = -r.q;
+    }
+
+    return r; // racional já válido
+}
+
+// -----------------------------------------------------------------------------
+// (b) neg(x): devolve -x
+// -----------------------------------------------------------------------------
+struct racional neg(struct racional x)
+{
+    struct racional r;
+    r.p = -x.p; // inverte o sinal do numerador
+    r.q = x.q;  // mantém denominador
+    return r;
+}
+
+// -----------------------------------------------------------------------------
+// (c) soma(x, y): devolve x + y, já reduzido
+// -----------------------------------------------------------------------------
+struct racional soma(struct racional x, struct racional y)
+{
+    struct racional r;
+
+    // (a/b) + (c/d) = (ad + bc) / (bd)
+    r.p = x.p * y.q + y.p * x.q;
+    r.q = x.q * y.q;
+
+    return reduz(r.p, r.q); // garante simplificado e q>0
+}
+
+// -----------------------------------------------------------------------------
+// (d) mult(x, y): devolve x * y, já reduzido
+// -----------------------------------------------------------------------------
+struct racional mult(struct racional x, struct racional y)
+{
+    struct racional r;
+
+    // (a/b) * (c/d) = (ac) / (bd)
+    r.p = x.p * y.p;
+    r.q = x.q * y.q;
+
+    return reduz(r.p, r.q);
+}
+
+// -----------------------------------------------------------------------------
+// (e) divi(x, y): devolve x / y, já reduzido
+// -----------------------------------------------------------------------------
+struct racional divi(struct racional x, struct racional y)
+{
+    struct racional r;
+
+    // divisão por 0: y = 0 significa y.p == 0 (pois y.p/y.q = 0)
+    if (y.p == 0)
+    {
+        printf("Erro: divisao por zero (y = 0)!\n");
+        r.p = 0;
+        r.q = 1;
+        return r;
+    }
+
+    // (a/b) / (c/d) = (a/b) * (d/c) = (ad) / (bc)
+    r.p = x.p * y.q;
+    r.q = x.q * y.p;
+
+    return reduz(r.p, r.q);
+}
+
+// -----------------------------------------------------------------------------
+// imprime(r): mostra p/q
+// -----------------------------------------------------------------------------
+void imprime(struct racional r)
+{
+    printf("%d/%d", r.p, r.q);
+}
+
+// -----------------------------------------------------------------------------
+// main (SEM protótipos: por isso main está no final)
+// -----------------------------------------------------------------------------
+int main(void)
+{
+    struct racional x, y;
+
+    // lê x
+    printf("Digite o numerador e denominador de x (p q): ");
+    scanf("%d %d", &x.p, &x.q);
+    x = reduz(x.p, x.q); // normaliza (q>0 e simplificado)
+
+    // lê y
+    printf("Digite o numerador e denominador de y (p q): ");
+    scanf("%d %d", &y.p, &y.q);
+    y = reduz(y.p, y.q);
+
+    // mostra x e y já reduzidos
+    printf("\nX reduzido: ");
+    imprime(x);
+
+    printf("\nY reduzido: ");
+    imprime(y);
+
+    // operações
+    printf("\n\n--- OPERACOES ---\n");
+
+    printf("neg(x): ");
+    imprime(neg(x));
+
+    printf("\nx + y: ");
+    imprime(soma(x, y));
+
+    printf("\nx * y: ");
+    imprime(mult(x, y));
+
+    printf("\nx / y: ");
+    imprime(divi(x, y));
+
+    printf("\n");
+
+    system("pause");
+    return 0;
+}
