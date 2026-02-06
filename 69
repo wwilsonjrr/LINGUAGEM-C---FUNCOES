@@ -1,0 +1,260 @@
+/*
+69. Faça um programa que faça operações simples de frações:
+- Leia duas frações (como string, ex: 3/4)
+- Simplifique as frações
+- Apresente soma, subtração, produto e quociente
+Obs.: Crie uma função para cada item.
+🔹 scanf → lê do teclado
+🔹 sscanf → lê de uma string
+*/
+
+// Biblioteca para entrada e saída (printf, fgets, sscanf)
+#include <stdio.h>
+
+// Biblioteca para funções matemáticas auxiliares (abs)
+#include <stdlib.h>
+
+// Biblioteca para manipulação de strings (strcspn)
+#include <string.h>
+
+// -----------------------------------------------------------------------------
+// Estrutura que representa uma fração matemática
+// -----------------------------------------------------------------------------
+struct Fracao
+{
+    int num; // armazena o numerador da fração
+    int den; // armazena o denominador da fração
+};
+
+// -----------------------------------------------------------------------------
+// Função que calcula o MDC (Máximo Divisor Comum)
+// Usada para simplificar frações
+// -----------------------------------------------------------------------------
+int mdc(int a, int b)
+{
+    // Garante que os valores sejam positivos
+    a = abs(a);
+    b = abs(b);
+
+    // Algoritmo de Euclides
+    while (b != 0)              // enquanto o segundo número não for zero
+    {
+        int resto = a % b;      // calcula o resto da divisão de a por b
+        a = b;                  // atualiza a com o valor de b
+        b = resto;              // atualiza b com o resto
+    }
+
+    // Se ambos forem zero, retorna 1 para evitar divisão por zero
+    if (a == 0 && b == 0)
+        return 1; // Porque 1 é o único número que NÃO altera nada quando divide.
+
+    // Retorna o MDC encontrado
+    return a;
+}
+
+// -----------------------------------------------------------------------------
+// Função que simplifica uma fração dividindo pelo MDC
+// -----------------------------------------------------------------------------
+
+
+//A função simplificar recebe uma struct Fracao chamada f
+struct Fracao simplificar(struct Fracao f)
+{
+    // Calcula o MDC entre numerador e denominador
+    int d = mdc(f.num, f.den);
+
+    // Divide numerador e denominador pelo MDC
+    f.num /= d;
+    f.den /= d;
+
+    // Se o denominador ficar negativo,
+    // passa o sinal para o numerador
+    if (f.den < 0)
+    {
+        f.num = -f.num;
+        f.den = -f.den;
+    }
+
+    // Retorna a fração simplificada
+    return f;
+}
+
+// -----------------------------------------------------------------------------
+// Função que lê uma fração digitada como string (ex: 3/4)
+// -----------------------------------------------------------------------------
+struct Fracao lerFracao(void) // Esta função não recebe nenhum parâmetro
+{
+    struct Fracao f;    // variável que armazenará a fração lida
+    char linha[50];     // string para ler a entrada do usuário
+
+    while (1)           // laço infinito até o usuário digitar corretamente
+    {
+        printf("Digite a fracao (ex: 3/4): ");
+
+        // Lê a linha digitada (inclui o '\n')
+        fgets(linha, sizeof(linha), stdin);
+
+        // Remove o '\n' deixado pelo fgets
+        linha[strcspn(linha, "\n")] = '\0';
+
+        // Tenta extrair dois inteiros no formato a/b
+        if (sscanf(linha, "%d/%d", &f.num, &f.den) == 2) // Como o formato tem dois %d, o valor correto é 2
+        {
+            // Verifica se o denominador é válido
+            if (f.den != 0)
+            {
+                return f; // leitura correta, retorna a fração
+            }
+            else
+            {
+                printf("Erro: denominador nao pode ser zero!\n");
+            }
+
+        }
+        else
+        {
+            // Caso a string não esteja no formato correto
+            printf("Entrada invalida. Use algo como 3/4.\n");
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Função que soma duas frações
+// Fórmula: a/b + c/d = (ad + bc) / bd
+// struct não tem operadores aritméticos definidos
+// -----------------------------------------------------------------------------
+struct Fracao somar(struct Fracao a, struct Fracao b)
+{
+    struct Fracao r;                 // fração resultado
+
+    r.num = a.num * b.den            // ad
+          + b.num * a.den;           // + bc
+
+    r.den = a.den * b.den;           // bd
+
+    // Retorna a fração já simplificada
+    return simplificar(r);
+}
+
+// -----------------------------------------------------------------------------
+// Função que subtrai duas frações
+// Fórmula: a/b - c/d = (ad - bc) / bd
+// -----------------------------------------------------------------------------
+struct Fracao subtrair(struct Fracao a, struct Fracao b)
+{
+    struct Fracao r;
+
+    r.num = a.num * b.den            // ad
+          - b.num * a.den;           // - bc
+
+    r.den = a.den * b.den;
+
+    return simplificar(r);
+}
+
+// -----------------------------------------------------------------------------
+// Função que multiplica duas frações
+// Fórmula: (a/b) * (c/d) = ac / bd
+// -----------------------------------------------------------------------------
+struct Fracao multiplicar(struct Fracao a, struct Fracao b)
+{
+    struct Fracao r;
+
+    r.num = a.num * b.num;           // ac
+    r.den = a.den * b.den;           // bd
+
+    return simplificar(r);
+}
+
+// -----------------------------------------------------------------------------
+// Função que divide duas frações
+// Fórmula: (a/b) ÷ (c/d) = (a/b) * (d/c)
+// -----------------------------------------------------------------------------
+struct Fracao dividir(struct Fracao a, struct Fracao b)
+{
+    struct Fracao r;
+
+    // Não é permitido dividir por uma fração com numerador zero
+    if (b.num == 0)
+    {
+        printf("Erro: divisao por zero.\n");
+
+        // Retorna fração neutra (0/1)
+        r.num = 0;
+        r.den = 1;
+        return r;
+    }
+
+    r.num = a.num * b.den;           // ad
+    r.den = a.den * b.num;           // bc
+
+    return simplificar(r);
+}
+
+// -----------------------------------------------------------------------------
+// Função que exibe uma fração na tela
+// -----------------------------------------------------------------------------
+void exibirFracao(struct Fracao f)
+{
+    // Se o denominador for 1, exibe apenas o número
+    if (f.den == 1)
+        printf("%d", f.num);
+    else
+        printf("%d/%d", f.num, f.den);
+
+    return;
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main(void)
+{
+    struct Fracao p, q;   // declara duas frações
+
+    printf("=== Operacoes com Fracoes ===\n\n");
+
+    // Lê a primeira fração
+    printf("Digite a fracao p:\n");
+    p = lerFracao();
+
+    // Lê a segunda fração
+    printf("Digite a fracao q:\n");
+    q = lerFracao();
+
+    // Simplifica ambas
+    p = simplificar(p);
+    q = simplificar(q);
+
+    // Exibe as frações simplificadas
+    printf("\nFracao p simplificada: ");
+    exibirFracao(p);
+
+    printf("\nFracao q simplificada: ");
+    exibirFracao(q);
+
+    printf("\n\n===== RESULTADOS =====\n");
+
+    // Exibe soma
+    printf("Soma: ");
+    exibirFracao(somar(p, q));
+
+    // Exibe subtração
+    printf("\nSubtracao: ");
+    exibirFracao(subtrair(p, q));
+
+    // Exibe produto
+    printf("\nProduto: ");
+    exibirFracao(multiplicar(p, q));
+
+    // Exibe quociente
+    printf("\nQuociente: ");
+    exibirFracao(dividir(p, q));
+
+    printf("\n");
+
+    // Finaliza o programa
+    system("pause");
+    return 0;
+}
