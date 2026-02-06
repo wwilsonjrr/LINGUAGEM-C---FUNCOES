@@ -1,0 +1,68 @@
+/*
+===============================================================================
+EXERCÍCIO 72
+
+Representação de um vetor no R³ usando struct.
+Implementar uma função que calcule a soma de dois vetores.
+
+Exemplo:
+v1 = (1, 2, 3)
+v2 = (4, 5, 6)
+resultado = (5, 7, 9)
+===============================================================================
+*/
+
+#include <stdio.h>   // printf, scanf
+#include <stdlib.h>  // system("pause")
+
+// -----------------------------------------------------------------------------
+// Estrutura que representa um vetor tridimensional
+// -----------------------------------------------------------------------------
+struct Vetor
+{
+    float x; // componente X
+    float y; // componente Y
+    float z; // componente Z
+};
+
+// -----------------------------------------------------------------------------
+// Função que soma dois vetores no R³
+// (SEM ponteiros: recebe structs por valor e retorna o resultado)
+// -----------------------------------------------------------------------------
+struct Vetor soma(struct Vetor v1, struct Vetor v2)
+{
+    struct Vetor r;   // vetor resultado
+
+    // Soma componente a componente
+    r.x = v1.x + v2.x;
+    r.y = v1.y + v2.y;
+    r.z = v1.z + v2.z;
+
+    return r;         // retorna o vetor soma
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+int main(void)
+{
+    struct Vetor v1, v2, resultado;
+
+    // Leitura do primeiro vetor
+    printf("Digite as componentes do primeiro vetor (x y z): ");
+    scanf("%f %f %f", &v1.x, &v1.y, &v1.z);
+
+    // Leitura do segundo vetor
+    printf("Digite as componentes do segundo vetor (x y z): ");
+    scanf("%f %f %f", &v2.x, &v2.y, &v2.z);
+
+    // Chamada da função soma (sem ponteiros)
+    resultado = soma(v1, v2);
+
+    // Exibição do resultado
+    printf("\nVetor resultante da soma: (%.2f, %.2f, %.2f)\n",
+           resultado.x, resultado.y, resultado.z);
+
+    system("pause");
+    return 0;
+}
