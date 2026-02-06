@@ -1,0 +1,103 @@
+/*
+===============================================================================
+EXERCÍCIO 71
+
+Dada a estrutura:
+
+    struct Ponto
+    {
+        int x;
+        int y;
+    };
+
+Implemente uma função que indique se um ponto p está localizado
+dentro ou fora de um retângulo.
+
+O retângulo é definido por:
+- v1 → vértice inferior esquerdo
+- v2 → vértice superior direito
+
+Retorno da função:
+1 → ponto dentro do retângulo
+0 → ponto fora do retângulo
+===============================================================================
+*/
+
+#include <stdio.h>   // printf, scanf
+#include <stdlib.h>  // system("pause")
+
+// -----------------------------------------------------------------------------
+// Estrutura que representa um ponto no plano cartesiano
+// -----------------------------------------------------------------------------
+struct Ponto
+{
+    int x; // coordenada X
+    int y; // coordenada Y
+};
+
+// -----------------------------------------------------------------------------
+// Função que verifica se o ponto p está dentro do retângulo
+// (SEM ponteiros: structs passadas por valor)
+// -----------------------------------------------------------------------------
+int dentroRet(struct Ponto v1, struct Ponto v2, struct Ponto p)
+{
+    /*
+        Para o ponto estar dentro do retângulo:
+
+        v1.x <= p.x <= v2.x
+        v1.y <= p.y <= v2.y
+    */
+
+    if (p.x >= v1.x && p.x <= v2.x &&
+        p.y >= v1.y && p.y <= v2.y)
+    {
+        return 1; // ponto dentro do retângulo
+    }
+    else
+    {
+        return 0; // ponto fora do retângulo
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Função principal
+// -----------------------------------------------------------------------------
+
+
+/*
+Regra simples para nunca errar
+
+Função sem parâmetros em C → (void)
+Isso vale para main e para qualquer função
+*/
+
+
+int main(void)
+{
+    struct Ponto v1, v2, p;
+    int resultado;
+
+    // Lê o vértice inferior esquerdo
+    printf("Digite as coordenadas do vertice inferior esquerdo (x y): ");
+    scanf("%d %d", &v1.x, &v1.y);
+
+    // Lê o vértice superior direito
+    printf("Digite as coordenadas do vertice superior direito (x y): ");
+    scanf("%d %d", &v2.x, &v2.y);
+
+    // Lê o ponto a ser testado
+    printf("Digite as coordenadas do ponto p (x y): ");
+    scanf("%d %d", &p.x, &p.y);
+
+    // Chama a função
+    resultado = dentroRet(v1, v2, p);
+
+    // Exibe o resultado
+    if (resultado == 1)
+        printf("\nO ponto P(%d, %d) ESTA dentro do retangulo.\n", p.x, p.y);
+    else
+        printf("\nO ponto P(%d, %d) NAO esta dentro do retangulo.\n", p.x, p.y);
+
+    system("pause");
+    return 0;
+}
