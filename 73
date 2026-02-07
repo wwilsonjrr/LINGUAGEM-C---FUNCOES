@@ -1,0 +1,147 @@
+/*
+===============================================================================
+EXERCÍCIO 73  (SEM PROTÓTIPOS, SEM TYPEDEF, SEM PONTEIROS EXPLÍCITOS)
+
+Pesquisa com 5 habitantes. Para cada um:
+- sexo: 'M' ou 'F'
+- olhos: 'A' (azuis) ou 'C' (castanhos)
+- cabelos: 'L' (louros), 'P' (pretos) ou 'C' (castanhos)
+- idade: inteiro
+
+Pedir:
+1) função que leia os dados em um vetor
+2) média de idade de pessoas com olhos castanhos e cabelos pretos
+3) maior idade
+4) quantidade de mulheres 18..35, olhos azuis e cabelos louros
+===============================================================================
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// -----------------------------------------------------------------------------
+// Struct declarada no início do código
+// -----------------------------------------------------------------------------
+struct Habitante
+{
+    char sexo;     // 'M' ou 'F'
+    char olhos;    // 'A' ou 'C'
+    char cabelos;  // 'L', 'P' ou 'C'
+    int idade;     // idade
+};
+
+// -----------------------------------------------------------------------------
+// 1) Lê os dados de n habitantes
+// Observação: em C, "struct Habitante v[]" é a forma padrão para receber vetor.
+// (não usamos int* nem mexemos com ponteiros, só índice v[i])
+// -----------------------------------------------------------------------------
+void lerDados(struct Habitante v[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("\nHabitante %d:\n", i + 1);
+
+        printf("Sexo (M/F): ");
+        scanf(" %c", &v[i].sexo); // espaço antes do %c ignora ENTER anterior
+
+        printf("Cor dos olhos (A-azuis / C-castanhos): ");
+        scanf(" %c", &v[i].olhos);
+
+        printf("Cor dos cabelos (L-louros / P-pretos / C-castanhos): ");
+        scanf(" %c", &v[i].cabelos);
+
+        printf("Idade: ");
+        scanf("%d", &v[i].idade);
+    }
+}
+
+// -----------------------------------------------------------------------------
+// 2) Retorna a média de idade de quem tem olhos castanhos ('C') e cabelos pretos ('P')
+// Se ninguém atender ao critério, retorna 0
+// -----------------------------------------------------------------------------
+float mediaCastanhoPreto(struct Habitante v[], int n)
+{
+    int soma = 0;
+    int cont = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i].olhos == 'C' && v[i].cabelos == 'P')
+        {
+            soma += v[i].idade;
+            cont++;
+        }
+    }
+
+    if (cont == 0)
+        return 0.0f;
+
+    return (float)soma / cont;
+}
+
+// -----------------------------------------------------------------------------
+// 3) Retorna a maior idade entre os habitantes
+// -----------------------------------------------------------------------------
+int maiorIdade(struct Habitante v[], int n)
+{
+    int maior = v[0].idade; // inicializa a maior idade no índice 0
+
+    for (int i = 1; i < n; i++) // inicio i = 1 porque já inicializou os índices em 0 anteriormente
+    {
+        if (v[i].idade > maior)
+            maior = v[i].idade;
+    }
+
+    return maior;
+}
+
+// -----------------------------------------------------------------------------
+// 4) Conta mulheres ('F') com:
+// idade entre 18 e 35 (inclusive),
+// olhos azuis ('A'),
+// cabelos louros ('L')
+// -----------------------------------------------------------------------------
+int mulheresAte35AzulLouro(struct Habitante v[], int n)
+{
+    int cont = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (v[i].sexo == 'F' &&
+            v[i].idade >= 18 && v[i].idade <= 35 &&
+            v[i].olhos == 'A' &&
+            v[i].cabelos == 'L')
+        {
+            cont++;
+        }
+    }
+
+    return cont;
+}
+
+// -----------------------------------------------------------------------------
+// main fica no final para não precisar de protótipos
+// -----------------------------------------------------------------------------
+int main(void)
+{
+    struct Habitante habitantes[5];
+    int n = 5;
+
+    // 1) ler dados
+    lerDados(habitantes, n);
+
+    // 2) média castanho + preto
+    float media = mediaCastanhoPreto(habitantes, n);
+    printf("\nMedia de idade (olhos castanhos e cabelos pretos): %.2f\n", media);
+
+    // 3) maior idade
+    int maior = maiorIdade(habitantes, n);
+    printf("Maior idade entre os habitantes: %d\n", maior);
+
+    // 4) mulheres 18..35, olhos azuis, cabelos louros
+    int qtd = mulheresAte35AzulLouro(habitantes, n);
+    printf("Quantidade de mulheres (18–35, olhos azuis, cabelos louros): %d\n", qtd);
+
+    system("pause");
+    return 0;
+}
